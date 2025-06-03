@@ -18,8 +18,6 @@
     </form>
 
 
-
-
     <h2>Notas</h2>
     <h2>Añadir</h2>
 
