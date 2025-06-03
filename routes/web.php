@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::get("login", function () {
+    return view('auth.login');
+})->name('login');
+
+Route::post("login", [App\Http\Controllers\AuthController::class, 'login']) ->name('login.post');
+
+
+Route::get("register", function () {
+    return view('auth.register');
+})->name("register");
+
+Route::post("register", [App\Http\Controllers\AuthController::class, 'register']) ->name('register.post');
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('home.index');
+    })->name('index');
+
+    Route::post('/logout', function (Request $request) {
+        auth('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')->with('status', 'Sesión cerrada correctamente');
+    })->name('logout');
 });

@@ -21,25 +21,25 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $token = $user->createToken('Personal Access Token')->accessToken;
 
+        $token = $user->createToken('Personal Access Token')->accessToken;
         return response()->json(['token' => $token], 201);
+
     }
 
 
-    public function login(Request $request)
-    {
-        $request->validate(User::loginRules());
+public function login(Request $request)
+{
+    $request->validate(User::loginRules());
 
+    $user = User::where('email', $request->email)->first();
 
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            return response()->json(['error' => 'Credenciales inválidas'], 401);
-        }
-
-        $token = $user->createToken('Personal Access Token')->accessToken;
-
-        return response()->json(['token' => $token], 200);
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        return back()->with('status', 'Credenciales inválidas');
     }
+
+    auth()->login($user);
+
+    return redirect()->route('index')->with('status', 'Login exitoso');
+}
 }

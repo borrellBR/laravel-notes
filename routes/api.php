@@ -18,8 +18,15 @@ use App\Http\Controllers\AuthController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+    Route::post('/logout', function (Request $request) {
+        auth()->logout();
+        return response()->json(['message' => 'Successfully logged out']);
+    })->middleware('auth:api')->name('logout');
+
+
 });
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
 
