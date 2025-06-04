@@ -2,7 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\NoteController;
+use App\Http\Controllers\Api\ImageController;
 
 
 /*
@@ -23,7 +26,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         return response()->json(['message' => 'Successfully logged out']);
     })->middleware('auth:api')->name('logout');
 
-
 });
 
+
+Route::middleware('auth:api')->post('/notes', [NoteController::class, 'store']);
+
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
 

@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->id();
             $table->string('header', 50);
-            $table->string('text', 50);
+            $table->text('text');
             $table->boolean('pinned')->default(false);
             $table->date('reminder')->nullable();
             $table->timestamps();

@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\NoteController;
+use App\Http\Controllers\Web\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +24,14 @@ Route::get("login", function () {
     return view('auth.login');
 })->name('login');
 
-Route::post("login", [App\Http\Controllers\AuthController::class, 'login']) ->name('login.post');
+Route::post("login", [AuthController::class, 'login']) ->name('login.post');
 
 
 Route::get("register", function () {
     return view('auth.register');
 })->name("register");
 
-Route::post("register", [App\Http\Controllers\AuthController::class, 'register']) ->name('register.post');
+Route::post("register", [AuthController::class, 'register']) ->name('register.post');
 
 
 

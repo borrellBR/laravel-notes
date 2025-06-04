@@ -16,5 +16,32 @@ class Note extends Model
         'reminder',
         'user_id',
     ];
-}
 
+    public static function validateNote(): array
+    {
+        return [
+            'header'     => 'required|string|max:50',
+            'text'       => 'required|string',
+            'pinned'    => 'required|boolean',
+            'reminder' => 'nullable|date',
+            'user_id'    => 'required|integer|exists:users,id',
+        ];
+    }
+
+
+    public static function updateNote(): array
+    {
+        return [
+            'header' => 'required|string|max:255',
+            'text'   => 'required|string',
+            'pinned' => 'boolean',
+            'reminder' => 'nullable|date',
+            'user_id' => 'required|integer|exists:users,id',
+        ];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}

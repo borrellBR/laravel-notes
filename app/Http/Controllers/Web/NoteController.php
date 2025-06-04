@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
+use App\Http\Controllers\Controller;
 
+use App\Models\Note;
 use Illuminate\Http\Request;
 
-class UserControllerr extends Controller
+class NoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,8 @@ class UserControllerr extends Controller
      */
     public function index()
     {
-        //
+        $notes = Note::all();
+        return view('notes.index', compact('notes'));
     }
 
     /**
@@ -23,7 +26,7 @@ class UserControllerr extends Controller
      */
     public function create()
     {
-        //
+        return view('notes.create');
     }
 
     /**
@@ -34,16 +37,28 @@ class UserControllerr extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(Note::validateNote());
+
+        Note::create([
+            'header' => $request->header,
+            'text' => $request->text,
+            'pinned' => $request->pinned,
+            'reminder' => $request->reminder,
+            'user_id' => auth()->id(),
+        ]);
+
+        session()->flash('status', 'Note created successfully');
+
+        return redirect()->route('notes.index')->with('status', 'Note created successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Note $note)
     {
         //
     }
@@ -51,10 +66,10 @@ class UserControllerr extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Note $note)
     {
         //
     }
@@ -63,10 +78,10 @@ class UserControllerr extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Note $note)
     {
         //
     }
@@ -74,10 +89,10 @@ class UserControllerr extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Note $note)
     {
         //
     }
