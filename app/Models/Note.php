@@ -24,6 +24,7 @@ class Note extends Model
             'text'       => 'required|string',
             'pinned'    => 'required|boolean',
             'reminder' => 'nullable|date',
+            'user_id'    => 'required|integer|exists:users,id',
         ];
     }
 
@@ -43,4 +44,9 @@ class Note extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function images()
+{
+    return $this->hasMany(Image::class);
+}
 }

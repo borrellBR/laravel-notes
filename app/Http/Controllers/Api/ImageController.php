@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Services\Api\ImageService;
 use App\Models\Image;
+use App\Models\Note;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -14,9 +15,10 @@ class ImageController extends Controller
     {
         $this->imageService = $imageService;
     }
-    public function index()
+    public function index(Note $note)
     {
-        //
+        return $this->imageService->index($note);
+
     }
 
     /**
@@ -35,10 +37,11 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Note $note)
     {
-        //
+        return app(ImageService::class)->store($request, $note);
     }
+
 
     /**
      * Display the specified resource.

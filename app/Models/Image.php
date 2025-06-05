@@ -13,4 +13,8 @@ class Image extends Model
         "image_url",
         'note_id',
     ];
-}
+
+    public function note()
+    {
+        return $this->belongsTo(Note::class);
+    }}

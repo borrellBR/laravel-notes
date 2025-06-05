@@ -35,6 +35,8 @@ Route::middleware('auth:api')->get('/notes/{note}', [NoteController::class, 'sho
 Route::middleware('auth:api')->put('/notes/{note}', [NoteController::class, 'update']);
 Route::middleware('auth:api')->delete('/notes/{note}', [NoteController::class, 'destroy']);
 
+Route::middleware('auth:api')->post('/notes/{note}/images', [ImageController::class, 'store']);
+Route::middleware('auth:api')->get('/notes/{note}/images', [ImageController::class, 'index']);
 
 
 Route::post('/login', [AuthController::class, 'login']);
