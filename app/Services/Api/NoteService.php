@@ -5,7 +5,7 @@ namespace App\Services\Api;
 use App\Models\Note;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class NoteService
 {
@@ -30,6 +30,12 @@ class NoteService
 
   public function store(Request $request)
   {
+    $userId  = Auth::id();
+
+    if ($request->user()->id !== auth()->id()) {
+      return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
 
     $request->validate(Note::validateNote());
 
