@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
 
 protected $authService;
-  public function __construct(AuthService $authService) //duda, declarar protecte arriba o dentro de parametros con private
+  public function __construct(AuthService $authService)
   {
     $this->authService = $authService;
   }

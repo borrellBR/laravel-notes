@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserControllerr extends Controller
 {
     protected $userService;
-    public function __construct(UserService $userService) //duda, declarar protecte arriba o dentro del construct con private
+    public function __construct(UserService $userService)
     {
       $this->userService = $userService;
     }

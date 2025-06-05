@@ -16,17 +16,9 @@ class NoteService
    */
   public function index()
   {
-    $notes = Note::all();
-    return response()->json($notes);
-  }
+    $notes = Note::where('user_id', auth()->id())->get();
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
+    return response()->json(['notes' => $notes], 200);
   }
 
   /**
@@ -46,7 +38,7 @@ class NoteService
         'text' => $request->text,
         'pinned' => $request->pinned,
         'reminder' => $request->reminder,
-      ]);
+    ]);
 
 return response()->json(['note' => $note], 201);
   }
@@ -57,32 +49,31 @@ return response()->json(['note' => $note], 201);
    * @param  \App\Models\Note  $note
    * @return \Illuminate\Http\Response
    */
-  public function show(Note $note)
+  public function show(int $id)
   {
-    //
+    $note = Note::find($id);
+    if (!$note) {
+      return response()->json(['error' => 'Note not found'], 404);
+  }
+    if ($note->user_id !== auth()->id()) {
+      return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
+    return response()->json(['note' => $note]);
   }
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  \App\Models\Note  $note
-   * @return \Illuminate\Http\Response
-   */
-  public function edit(Note $note)
-  {
-    //
-  }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  \App\Models\Note  $note
-   * @return \Illuminate\Http\Response
-   */
   public function update(Request $request, Note $note)
   {
-    //
+    $request->validate(Note::validateNote());
+
+    $note->update([
+        'header' => $request->header,
+        'text' => $request->text,
+        'pinned' => $request->pinned,
+        'reminder' => $request->reminder,
+    ]);
+    return response()->json(['note' => $note], 200);
   }
 
   /**

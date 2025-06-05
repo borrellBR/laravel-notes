@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ImageController extends Controller
 {
     protected $imageService;
-    public function __construct(ImageService $imageService) //duda, declarar protecte arriba o dentro del construct con private
+    public function __construct(ImageService $imageService)
     {
       $this->imageService = $imageService;
     }
