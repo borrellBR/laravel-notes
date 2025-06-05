@@ -65,6 +65,9 @@ return response()->json(['note' => $note], 201);
 
   public function update(Request $request, Note $note)
   {
+    if ($note->user_id !== auth()->id()) {
+      return response()->json(['error' => 'Unauthorized'], 403);
+    }
     $request->validate(Note::validateNote());
 
     $note->update([
