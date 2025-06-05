@@ -9,7 +9,6 @@ use Illuminate\Http\RedirectResponse;
 
 class AuthService
 {
-  /* ---------- REGISTRO ---------- */
   public function register(array $data): RedirectResponse
   {
     $user = User::create([
@@ -26,7 +25,6 @@ class AuthService
       ->with('status', 'Registro exitoso');
   }
 
-  /* ---------- LOGIN ------------- */
   public function login(array $data): RedirectResponse
   {
     $user = User::where('email', $data['email'])->first();

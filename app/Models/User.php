@@ -63,5 +63,8 @@ public static function loginRules(): array
         'password' => 'required',
     ];
 }
-
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }

@@ -35,21 +35,20 @@ class NoteService
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
+
   public function store(Request $request)
   {
 
     $request->validate(Note::validateNote());
-    Note::create([
-      'header' => $request->header,
-      'text' => $request->text,
-      'pinned' => $request->pinned,
-      'reminder' => $request->reminder,
-      'user_id' => auth()->id(),
-    ]);
 
-    return response()->json([
-      'message' => 'Note created successfully',
-    ], 201);
+    $note = $request->user()->notes()->create([
+        'header' => $request->header,
+        'text' => $request->text,
+        'pinned' => $request->pinned,
+        'reminder' => $request->reminder,
+      ]);
+
+return response()->json(['note' => $note], 201);
   }
 
   /**

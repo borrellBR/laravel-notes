@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-
+use App\Services\Web\ImageService;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $imageService;
+    public function __construct(ImageService $imageService) //duda, declarar protecte arriba o dentro del construct con private
+    {
+      $this->imageService = $imageService;
+    }
     public function index()
     {
         //

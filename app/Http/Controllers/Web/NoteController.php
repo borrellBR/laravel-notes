@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-
-  public function __construct(private NoteService $noteService)
+    protected $noteService;
+  public function __construct(NoteService $noteService) //duda, declarar protecte arriba o dentro del construct con private
   {
+    $this->noteService = $noteService;
   }
 
   public function index()

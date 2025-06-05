@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
-
+use App\Services\Api\UserService;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserControllerr extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $userService;
+    public function __construct(UserService $userService) //duda, declarar protecte arriba o dentro del construct con private
+    {
+      $this->userService = $userService;
+    }
+
     public function index()
     {
         //

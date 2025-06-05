@@ -8,7 +8,6 @@ use Illuminate\Http\JsonResponse;
 
 class AuthService
 {
-  /* ---------- REGISTRO ---------- */
   public function register(array $data): JsonResponse
   {
     $user = User::create([
@@ -28,7 +27,6 @@ class AuthService
     ], 201);
   }
 
-  /* ---------- LOGIN ------------- */
   public function login(array $data): JsonResponse
   {
     $user = User::where('email', $data['email'])->first();
