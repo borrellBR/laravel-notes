@@ -6,7 +6,7 @@ use App\Services\Api\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserControllerr extends Controller
+class UserController extends Controller
 {
     protected $userService;
     public function __construct(UserService $userService)
@@ -69,9 +69,9 @@ class UserControllerr extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        return $this->userService->update($request, $user);
     }
 
     /**

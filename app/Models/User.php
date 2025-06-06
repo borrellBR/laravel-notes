@@ -72,4 +72,14 @@ public static function loginRules(): array
     {
         return $this->hasMany(Image::class);
     }
+
+    public static function updateRules(): array
+    {
+        return [
+            'name'     => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email'    => 'required|string|email|unique:users,email,' . auth()->id(),
+            'password' => 'nullable|string|min:6',
+        ];
+    }
 }

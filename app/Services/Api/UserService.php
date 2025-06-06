@@ -68,10 +68,15 @@ class UserService
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user): JsonResponse
     {
-        //
+        $data = $request->validate(User::updateRules());
+
+        $user->update($data);
+
+        return response()->json(['message' => 'User updated successfully', 'user' => $user], 200);
     }
+
 
     /**
      * Remove the specified resource from storage.
