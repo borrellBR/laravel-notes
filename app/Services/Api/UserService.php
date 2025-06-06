@@ -70,6 +70,11 @@ class UserService
      */
     public function update(Request $request, User $user): JsonResponse
     {
+
+        if ($user->id !== auth('api')->id()) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
         $data = $request->validate(User::updateRules());
 
         $user->update($data);
