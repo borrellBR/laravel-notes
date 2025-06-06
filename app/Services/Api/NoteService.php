@@ -39,14 +39,15 @@ class NoteService
 
     $request->validate(Note::validateNote());
 
-    $note = $request->user()->notes()->create([
-        'header' => $request->header,
-        'text' => $request->text,
-        'pinned' => $request->pinned,
-        'reminder' => $request->reminder,
+    Note::create([
+      'header' => $request->header,
+      'text' => $request->text,
+      'pinned' => $request->pinned,
+      'reminder' => $request->reminder,
+      'user_id' => auth()->id(),
     ]);
 
-return response()->json(['note' => $note], 201);
+    return response()->json(['message' => 'Note created successfully'], 201);
   }
 
   /**
@@ -74,6 +75,7 @@ return response()->json(['note' => $note], 201);
     if ($note->user_id !== auth()->id()) {
       return response()->json(['error' => 'Unauthorized'], 403);
     }
+
     $request->validate(Note::validateNote());
 
     $note->update([

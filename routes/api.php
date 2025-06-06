@@ -21,10 +21,6 @@ use App\Http\Controllers\Api\ImageController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-    Route::post('/logout', function (Request $request) {
-        auth()->logout();
-        return response()->json(['message' => 'Successfully logged out']);
-    })->middleware('auth:api')->name('logout');
 
 });
 
@@ -41,4 +37,6 @@ Route::middleware('auth:api')->get('/notes/{note}/images', [ImageController::cla
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
 

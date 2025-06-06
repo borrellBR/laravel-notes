@@ -35,7 +35,8 @@ class AuthService
       return response()->json(['message' => 'Credenciales inválidas'], 401);
     }
 
-    $token = $user->createToken('MyApp')->accessToken;
+    $tokenResult = $user->createToken('MyApp');
+    $token = $tokenResult->accessToken;
 
     return response()->json([
       'message' => 'Login exitoso',
@@ -44,4 +45,19 @@ class AuthService
       'token_type' => 'Bearer',
     ]);
   }
+
+  public function logout(): JsonResponse
+  {
+      $user = auth()->user();
+
+      if (!$user) {
+          return response()->json(['error' => 'No autenticado'], 401);
+      }
+
+      // Revoca todos los tokens activos del usuario (simple y efectivo)
+      $user->tokens->each->revoke();
+
+      return response()->json(['message' => 'Logout exitoso'], 200);
+  }
+
 }

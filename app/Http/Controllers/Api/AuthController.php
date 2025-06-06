@@ -25,4 +25,8 @@ class AuthController extends Controller
     $data = $request->validate(User::loginRules());
     return $this->authService->login($data);
   }
+    public function logout(Request $request)
+    {
+        return $this->authService->logout();
+    }
 }
