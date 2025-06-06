@@ -74,6 +74,10 @@ class UserController extends Controller
         return $this->userService->update($request, $user);
     }
 
+    public function changePassword(Request $request){
+        return $this->userService->changePassword($request);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\NoteController;
 use App\Http\Controllers\Api\ImageController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 
 
 /*
@@ -23,8 +24,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-Route::middleware('auth:api')->get('/users', [UserController::class, 'index']);
 
+Route::middleware('auth:api')->get('/users', [UserController::class, 'index']);
+Route::middleware('auth:api')->put('/users/{user}', [UserController::class, 'update']);
+
+
+Route::middleware('auth:api')->post('/change-password', [UserController::class, 'changePassword']);
+
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword']);
 
 Route::middleware('auth:api')->post('/notes', [NoteController::class, 'store']);
 Route::middleware('auth:api')->get('/notes', [NoteController::class, 'index']);
