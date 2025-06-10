@@ -52,7 +52,6 @@ class ForgotPasswordService
         $user = User::where('email', $request->email)->first();
         $user->update(['password' => Hash::make($request->password)]);
 
-        // Eliminar token usado
         DB::table('password_resets')->where('email', $request->email)->delete();
 
         return response()->json(['message' => 'Contraseña actualizada correctamente.']);

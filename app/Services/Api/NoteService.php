@@ -16,7 +16,11 @@ class NoteService
    */
   public function index()
   {
-    $notes = Note::where('user_id', auth()->id())->get();
+    if (!auth()->check()) {
+      return response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+    $notes = Note::with('images')->where('user_id', auth()->id())->get();
 
     return response()->json(['notes' => $notes], 200);
   }
@@ -58,15 +62,18 @@ class NoteService
    */
   public function show(int $id)
   {
-    $note = Note::find($id);
-    if (!$note) {
-      return response()->json(['error' => 'Note not found'], 404);
-  }
-    if ($note->user_id !== auth()->id()) {
-      return response()->json(['error' => 'Unauthorized'], 403);
+
+    if (!auth()->check()) {
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
-    return response()->json(['note' => $note]);
+    $note = Note::with("images")->where('user_id', auth()->id())->findOrFail($id);
+
+    if (!$note) {
+        return response()->json(['error' => 'Note not found'], 404);
+    }
+
+    return response()->json(['note' => $note],200);
   }
 
 
