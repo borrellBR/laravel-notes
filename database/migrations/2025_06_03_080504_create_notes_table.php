@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('header', 50);
             $table->text('text');
             $table->boolean('pinned')->default(false);
-            $table->timestamp('reminder')->nullable();
+            $table->dateTime('reminder')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
 

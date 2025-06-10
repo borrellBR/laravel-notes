@@ -9,28 +9,26 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ResetPasswordMail extends Mailable
+class ReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public string $token;
+    public $note;
 
-    public function __construct(string $token)
+    public function __construct($note)
     {
-        $this->token = $token;
-    }
-
-    public function build()
-    {
-        return $this->subject('Recuperación de contraseña')
-        ->text('emails.resetPassword');
-
+        $this->note = $note;
     }
 
     public function envelope()
     {
         return new Envelope(
-            subject: 'Reset Password Mail',
+            subject: 'Note Reminder Mail',
         );
+    }
+
+    public function build(){
+        return $this->subject('Note Reminder')
+                    ->text('emails.reminder');
     }
 }
