@@ -20,17 +20,13 @@ class NoteService
       return response()->json(['error' => 'Unauthorized'], 401);
     }
 
-    $notes = Note::with('images')->where('user_id', auth()->id())->get();
-
+    $notes = Note::with('images')
+    ->where('user_id', auth()->id())
+    ->orderBy('pinned', 'desc')
+    ->orderBy('created_at', 'desc')
+    ->get();
     return response()->json(['notes' => $notes], 200);
   }
-
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
 
   public function store(Request $request)
   {
