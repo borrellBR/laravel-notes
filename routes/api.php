@@ -27,10 +27,8 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-
 });
 
-Route::middleware('auth:api')->get('/users', [UserController::class, 'index']);
 Route::middleware('auth:api')->put('/users/{user}', [UserController::class, 'update']);
 
 

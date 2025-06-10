@@ -71,16 +71,18 @@ class UserService
      */
     public function update(Request $request, User $user)
     {
+        $user = auth()->user();
 
-        if ($user->id !== auth('api')->id()) {
-            return redirect()->back()->with('error', 'Unauthorized');
-        }
-
-        $data = $request->validate(User::updateRules());
+        $data = $request->validate([
+            'name'     => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email'    => 'required|string|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:6',
+        ]);
 
         $user->update($data);
 
-        return redirect()->back()->with('message', 'User updated successfully');
+        return redirect()->route('edit-profile')->with('message', 'Perfil actualizado correctamente');
     }
 
 

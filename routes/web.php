@@ -33,6 +33,10 @@ Route::get("forgot-password", function () {
     return view('auth.forgot-password');
 })->name('forgot-password');
 
+Route::get("reset-password/{token}", function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->name('reset-password');
+
 
 
 Route::post("login", [AuthController::class, 'login']) ->name('login.post');
@@ -40,9 +44,7 @@ Route::post("register", [AuthController::class, 'register']) ->name('register.po
 Route::post("forgot-password", [ForgotPasswordController::class, 'sendResetLink']) ->name('forgot-password.post');
 Route::post("reset-password", [ForgotPasswordController::class, 'resetPassword']) ->name('reset-password.post');
 
-Route::get("reset-password/{token}", function ($token) {
-    return view('auth.reset-password', ['token' => $token]);
-})->name('reset-password');
+
 
 // AUTHENTICATION REQUIRED
 
@@ -51,6 +53,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('home.index');
     })->name('index');
+
+    Route::get("edit-profile", function () {
+        return view('user.edit-profile');
+    })->name('edit-profile');
+
+    Route::put("edit-profile", [UserController::class, 'update']) ->name('edit-profile.put');
+
 
     Route::post('/logout', function (Request $request) {
         auth('web')->logout();
