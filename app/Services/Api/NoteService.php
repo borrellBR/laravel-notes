@@ -20,6 +20,10 @@ class NoteService
       return response()->json(['error' => 'Unauthorized'], 401);
     }
 
+    if (Note::where('user_id', auth()->id())->doesntExist()) {
+      return response()->json(['message' => 'No notes found'], 404);
+    }
+
     $notes = Note::with('images')
     ->where('user_id', auth()->id())
     ->orderBy('pinned', 'desc')
@@ -30,12 +34,10 @@ class NoteService
 
   public function store(Request $request)
   {
-    $userId  = Auth::id();
 
     if ($request->user()->id !== auth()->id()) {
       return response()->json(['error' => 'Unauthorized'], 403);
     }
-
 
     $request->validate(Note::validateNote());
 

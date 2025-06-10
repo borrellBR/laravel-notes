@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-
-protected $authService;
-  public function __construct(AuthService $authService)
+  public function __construct(private AuthService $authService)
   {
     $this->authService = $authService;
+
   }
 
   public function register(Request $request)
@@ -27,4 +26,8 @@ protected $authService;
     $data = $request->validate(User::loginRules());
     return $this->authService->login($data);
   }
+    public function logout(Request $request)
+    {
+        return $this->authService->logout();
+    }
 }

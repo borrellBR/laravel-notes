@@ -61,5 +61,4 @@ public static function loginRules(): array
     {
         return $this->hasMany(Note::class);
     }
-
 }

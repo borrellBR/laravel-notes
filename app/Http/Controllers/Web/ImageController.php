@@ -5,17 +5,20 @@ use App\Http\Controllers\Controller;
 use App\Services\Web\ImageService;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use App\Models\Note;
+
 
 class ImageController extends Controller
 {
     protected $imageService;
     public function __construct(ImageService $imageService)
     {
-      $this->imageService = $imageService;
+        $this->imageService = $imageService;
     }
-    public function index()
+    public function index(Note $note)
     {
-        //
+        return $this->imageService->index($note);
+
     }
 
     /**
@@ -34,10 +37,11 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Note $note)
     {
-        //
+        return app(ImageService::class)->store($request, $note);
     }
+
 
     /**
      * Display the specified resource.

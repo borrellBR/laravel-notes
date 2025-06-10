@@ -7,27 +7,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="POST" action="{{ route('login') }}">
+
+    <h1>Forgot Password</h1>
+    <form method="POST" action="{{ route('forgot-password') }}">
         @csrf
         <div>
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required autofocus>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">Login</button>
+        <button type="submit">Send Password Reset Link</button>
     </form>
 
     @if (session('status'))
         <div>{{ session('status') }}</div>
     @endif
 
-    <a href="{{ route('register') }}">Register</a>
-
-
-    <a href="{{ route('forgot-password') }}">Has olvidado tu contraseña?</a>
+    <a href="{{ route('login') }}">Login</a>
 </body>
 </html>

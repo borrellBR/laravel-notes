@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -68,10 +69,20 @@ class UserService
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+
+        if ($user->id !== auth('api')->id()) {
+            return redirect()->back()->with('error', 'Unauthorized');
+        }
+
+        $data = $request->validate(User::updateRules());
+
+        $user->update($data);
+
+        return redirect()->back()->with('message', 'User updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -83,4 +94,27 @@ class UserService
     {
         //
     }
+    public function changePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => 'required|string',
+        'new_password'     => 'required|string|min:6|confirmed',
+        'new_password_confirmation' => 'required|string|min:6',
+    ]);
+
+    $user = auth()->user();
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        return redirect()->back()->with('error', 'La contraseña actual es incorrecta');
+    }
+
+    if (Hash::check($request->new_password, $user->password)) {
+        return redirect()->back()->with('error', 'La nueva contraseña no puede ser la misma que la actual');
+    }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return redirect()->back()->with('message', 'Contraseña cambiada exitosamente');
+}
 }

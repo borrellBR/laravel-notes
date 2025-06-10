@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\NoteController;
 use App\Http\Controllers\Web\ImageController;
+use App\Http\Controllers\Web\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,24 +19,35 @@ use App\Http\Controllers\Web\ImageController;
 |
 */
 
-
+// NO AUTHENTICATION
 
 Route::get("login", function () {
     return view('auth.login');
 })->name('login');
 
-Route::post("login", [AuthController::class, 'login']) ->name('login.post');
-
-
 Route::get("register", function () {
     return view('auth.register');
 })->name("register");
 
+Route::get("forgot-password", function () {
+    return view('auth.forgot-password');
+})->name('forgot-password');
+
+
+
+Route::post("login", [AuthController::class, 'login']) ->name('login.post');
 Route::post("register", [AuthController::class, 'register']) ->name('register.post');
+Route::post("forgot-password", [ForgotPasswordController::class, 'sendResetLink']) ->name('forgot-password.post');
+Route::post("reset-password", [ForgotPasswordController::class, 'resetPassword']) ->name('reset-password.post');
 
+Route::get("reset-password/{token}", function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->name('reset-password');
 
+// AUTHENTICATION REQUIRED
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/', function () {
         return view('home.index');
     })->name('index');
@@ -47,4 +59,5 @@ Route::middleware('auth')->group(function () {
 
         return redirect()->route('login')->with('status', 'Sesión cerrada correctamente');
     })->name('logout');
+
 });

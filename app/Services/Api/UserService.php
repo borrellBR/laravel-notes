@@ -94,7 +94,6 @@ class UserService
     {
         //
     }
-
     public function changePassword(Request $request)
 {
     $request->validate([

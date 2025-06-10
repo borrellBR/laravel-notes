@@ -39,4 +39,23 @@ class AuthService
       ->route('index')
       ->with('status', 'Login exitoso');
   }
+
+
+  public function logout()
+  {
+      $user = auth()->user();
+
+      if (!$user) {
+          return redirect()
+              ->route('login')
+              ->with('status', 'No estás autenticado');
+      }
+
+      // Revoca todos los tokens activos del usuario (simple y efectivo)
+      $user->tokens->each->revoke();
+
+      return redirect()
+          ->route('login')
+          ->with('status', 'Sesión cerrada correctamente');
+  }
 }
