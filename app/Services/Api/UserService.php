@@ -109,6 +109,10 @@ class UserService
         return response()->json(['error' => 'La contraseña actual es incorrecta'], 403);
     }
 
+    if (Hash::check($request->new_password, $user->password)) {
+        return response()->json(['error' => 'La nueva contraseña no puede ser la misma que la actual'], 400);
+    }
+
     $user->password = Hash::make($request->new_password);
     $user->save();
 
