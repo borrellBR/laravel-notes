@@ -16,21 +16,18 @@
     <li>
         <a href="{{ route('notes.show', $note->id) }}">{{ $note->header }}</a>
         <p>{{ $note->text }}</p>
+
         <p><strong>Fijada:</strong> {{ $note->pinned ? 'Sí' : 'No' }}</p>
+
 
         @if ($note->reminder)
             <p><strong>Recordatorio:</strong> {{ $note->reminder ?? '' }}</p>
         @endif
 
         <div>
-            <h4>Imágenes:</h4>
-            @if ($note->images->isEmpty())
-                <p>No hay imágenes asociadas a esta nota.</p>
-            @else
-                @foreach ($note->images as $image)
-                    <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota">
-                @endforeach
-            @endif
+            @foreach ($note->images as $image)
+                <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota">
+            @endforeach
         </div>
 
         <form method="POST" action="{{ route('notes.destroy', $note->id) }}">

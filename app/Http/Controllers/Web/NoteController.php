@@ -42,6 +42,7 @@ class NoteController extends Controller
   {
     return $this->noteService->update($request, $note);
   }
+
   public function destroy($id)
   {
     return $this->noteService->destroy($id);

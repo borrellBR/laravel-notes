@@ -121,7 +121,6 @@ class NoteService
     return redirect()->route('index')->with('message', 'Note updated successfully');
   }
 
-
   public function destroy($id)
   {
     $note = Note::findOrFail($id);
