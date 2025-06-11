@@ -8,8 +8,7 @@
 </head>
 <body>
 @include ('layouts.header')
-
-    <h1>scribl</h1>
+    <p>AQUI IRA LA SEARCHBAR QUE AUN NO ESTA HECHA</p>
     <h2>Mis notas</h2>
     <a href="{{ route('notes.create') }}">Crear Nota</a>
     <ul>
@@ -21,8 +20,8 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit">Eliminar</button>
+                    <a href="{{ route('notes.edit', $note->id) }}">Editar</a>
                 </form>
-                <a href="{{ route('notes.edit', $note->id) }}">Editar</a>
             </li>
         @endforeach
 

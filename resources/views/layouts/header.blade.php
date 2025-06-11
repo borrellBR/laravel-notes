@@ -8,12 +8,15 @@
 </head>
 <body>
     <a href ="{{ route('index') }}">Inicio</a>
+    <a href ="{{ route('index') }}">Scrible</a>
+
     <a href="{{ route('edit-profile') }}">Editar Perfil</a>
 
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit">Cerrar Sesión</button>
     </form>
+
 
 </body>
 </html>

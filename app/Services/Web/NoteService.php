@@ -63,7 +63,7 @@ class NoteService
         return redirect()->back()->with('error', 'Note not found');
     }
 
-    return redirect()->back()->with('note', $note);
+    return view('notes.show', compact('note'));
   }
 
   public function create()

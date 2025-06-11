@@ -8,9 +8,6 @@
 </head>
 <body>
 @include ('layouts.header')
-
-    <h1>scribl</h1>
-    <h2>Mis notas</h2>
     <h1>Crear Nota</h1>
 
 
@@ -19,16 +16,17 @@
 
     <label for="header">Encabezado</label>
     <input type="text" name="header" id="header" required>
-
+<br>
     <label for="text">Texto</label>
     <textarea name="text" id="text" required></textarea>
-
+    <br>
     <input type="hidden" name="pinned" value="0">
+    <label for="pinned">Fijar</label>
     <input type="checkbox" name="pinned" id="pinned" value="1">
-
+    <br>
     <label for="reminder">Recordatorio</label>
     <input type="date" name="reminder" id="reminder">
-
+    <br><br>
     <button type="submit">Guardar</button>
 </form>
 
