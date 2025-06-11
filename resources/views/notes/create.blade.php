@@ -11,7 +11,7 @@
     <h1>Crear Nota</h1>
 
 
-<form method="POST" action="{{ route('notes.store') }}">
+<form method="POST" action="{{ route('notes.store') }}" enctype="multipart/form-data">>
     @csrf
 
     <label for="header">Encabezado</label>
@@ -26,7 +26,11 @@
     <br>
     <label for="reminder">Recordatorio</label>
     <input type="date" name="reminder" id="reminder">
-    <br><br>
+    <br>
+    <label for="image">Imagen</label>
+    <input type="file" name="image" id="image" accept="image/*">
+    <br>
+
     <button type="submit">Guardar</button>
 </form>
 

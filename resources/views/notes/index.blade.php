@@ -13,17 +13,35 @@
     <a href="{{ route('notes.create') }}">Crear Nota</a>
     <ul>
         @foreach ($notes as $note)
-            <li>
-                <a href="{{ route('notes.show', $note->id) }}">{{ $note->header }}</a>
-                <p>{{ $note->text }}</p>
-                <form method="POST" action="{{ route('notes.destroy', $note->id) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Eliminar</button>
-                    <a href="{{ route('notes.edit', $note->id) }}">Editar</a>
-                </form>
-            </li>
-        @endforeach
+    <li>
+        <a href="{{ route('notes.show', $note->id) }}">{{ $note->header }}</a>
+        <p>{{ $note->text }}</p>
+        <p><strong>Fijada:</strong> {{ $note->pinned ? 'Sí' : 'No' }}</p>
+
+        @if ($note->reminder)
+            <p><strong>Recordatorio:</strong> {{ $note->reminder ?? '' }}</p>
+        @endif
+
+        <div>
+            <h4>Imágenes:</h4>
+            @if ($note->images->isEmpty())
+                <p>No hay imágenes asociadas a esta nota.</p>
+            @else
+                @foreach ($note->images as $image)
+                    <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota">
+                @endforeach
+            @endif
+        </div>
+
+        <form method="POST" action="{{ route('notes.destroy', $note->id) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Eliminar</button>
+            <a href="{{ route('notes.edit', $note->id) }}">Editar</a>
+        </form>
+        <br>
+    </li>
+@endforeach
 
     @if (session('status'))
         <div>{{ session('status') }}</div>

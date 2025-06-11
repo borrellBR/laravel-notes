@@ -31,24 +31,32 @@ class NoteService
 
 
   public function store(Request $request)
-  {
-
+{
     if ($request->user()->id !== auth()->id()) {
-      return response()->json(['error' => 'Unauthorized'], 403);
+        return response()->json(['error' => 'Unauthorized'], 403);
     }
 
     $request->validate(Note::validateNote());
 
-    Note::create([
-      'header' => $request->header,
-      'text' => $request->text,
-      'pinned' => $request->pinned,
-      'reminder' => $request->reminder,
-      'user_id' => auth()->id(),
+    $note = Note::create([
+        'header' => $request->header,
+        'text' => $request->text,
+        'pinned' => $request->pinned,
+        'reminder' => $request->reminder,
+        'user_id' => auth()->id(),
     ]);
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
+
+        $note->images()->create([
+            'image_url' => $imagePath
+        ]);
+    }
 
     return redirect()->route('index')->with('message', 'Nota creada correctamente');
 }
+
 
   public function show(int $id)
   {
@@ -100,8 +108,17 @@ class NoteService
         'text' => $request->text,
         'pinned' => $request->pinned,
         'reminder' => $request->reminder,
+        'user_id' => auth()->id(),
     ]);
-    return redirect()->route('index', $note->id)->with('message', 'Note updated successfully');
+
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
+
+        $note->images()->create([
+            'image_url' => $imagePath
+        ]);
+    }
+    return redirect()->route('index')->with('message', 'Note updated successfully');
   }
 
 

@@ -9,7 +9,7 @@
 <body>
     @include ('layouts.header')
     <h1>Edit Note</h1>
-    <form method="POST" action="{{ route('notes.update', $note->id) }}">
+    <form method="POST" action="{{ route('notes.update', $note->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div>
@@ -29,6 +29,9 @@
             <label for="reminder">Reminder:</label>
             <input type="datetime-local" id="reminder" name="reminder" value="{{ old('reminder', $note->reminder ?? '') }}">
         </div>
+        <br>
+        <label for="image">Imagen</label>
+        <input type="file" name="image" id="image" accept="image/*">
         @if ($errors->any())
             <div>
                 <ul>
