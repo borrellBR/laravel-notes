@@ -7,25 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-
-    <h1>scribl</h1>
-
-    <h2>Editar Perfil</h2>
+    <a href ="{{ route('index') }}">Inicio</a>
+    <a href="{{ route('edit-profile') }}">Editar Perfil</a>
 
     <form method="POST" action="{{ route('logout') }}">
         @csrf
-        <button type="submit">Cerrar sesión</button>
+        <button type="submit">Cerrar Sesión</button>
     </form>
 
-
-    <h2>Notas</h2>
-    <h2>Añadir</h2>
-
-
-    <p>Bienvenido a tu aplicación de notas.</p>
-
-    @if (session('status'))
-        <div>{{ session('status') }}</div>
-    @endif
 </body>
 </html>

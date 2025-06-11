@@ -50,15 +50,27 @@ Route::post("reset-password", [ForgotPasswordController::class, 'resetPassword']
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', function () {
-        return view('home.index');
-    })->name('index');
+    Route::get('/', [NoteController::class, 'index'])->name('index');
+    Route::get('notes/create', [NoteController::class, 'create'])->name('notes.create');
+    Route::get('notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
+    Route::put('notes/{note}', [NoteController::class, 'update'])->name('notes.update');
+    Route::delete('notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
+    // Route::get('notes/{note}', [NoteController::class, 'show'])->name('notes.show');
+
+
+
+Route::get('notes/create', [NoteController::class, 'create'])->name('notes.create');
+
+
+Route::post('notes', [NoteController::class, 'store'])->name('notes.store');
 
     Route::get("edit-profile", function () {
         return view('user.edit-profile');
     })->name('edit-profile');
 
     Route::put("edit-profile", [UserController::class, 'update']) ->name('edit-profile.put');
+
+
 
 
     Route::post('/logout', function (Request $request) {

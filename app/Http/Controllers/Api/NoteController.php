@@ -35,5 +35,7 @@ class NoteController extends Controller
   }
   public function destroy($id)
   {
+    $note = Note::findOrFail($id);
+    return $this->noteService->destroy($note);
   }
 }

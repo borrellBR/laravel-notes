@@ -23,7 +23,8 @@ class Note extends Model
             'header'     => 'required|string|max:50',
             'text'       => 'required|string',
             'pinned'    => 'required|boolean',
-            'reminder' => 'nullable|date'        ];
+            'reminder' => 'nullable|date'
+        ];
     }
 
 
@@ -33,7 +34,8 @@ class Note extends Model
             'header' => 'required|string|max:255',
             'text'   => 'required|string',
             'pinned' => 'boolean',
-            'reminder' => 'nullable|date'        ];
+            'reminder' => 'nullable|date'
+        ];
     }
 
     public function user()

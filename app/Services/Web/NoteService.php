@@ -10,34 +10,31 @@ use Illuminate\Http\RedirectResponse;
 
 class NoteService
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
   public function index()
   {
-    if (!auth()->check()) {
-      return response()->json(['error' => 'Unauthorized'], 401);
-    }
+      if (!auth()->check()) {
+          return redirect()->route('login')->with('error', 'No autorizado');
+      }
 
-    if (Note::where('user_id', auth()->id())->doesntExist()) {
-      return redirect()->back()->with('message', 'No notes found.');
-    }
+      $notes = Note::with('images')
+          ->where('user_id', auth()->id())
+          ->orderBy('pinned', 'desc')
+          ->orderBy('created_at', 'desc')
+          ->get();
 
-    $notes = Note::with('images')
-    ->where('user_id', auth()->id())
-    ->orderBy('pinned', 'desc')
-    ->orderBy('created_at', 'desc')
-    ->get();
-    return redirect()->back()->with('notes', $notes);
+        if (!$notes) {
+            return redirect()->back()->with('error', 'No notes found');
+        }
+
+      return view('notes.index', compact('notes'));
   }
+
 
   public function store(Request $request)
   {
 
     if ($request->user()->id !== auth()->id()) {
-      return redirect()->back()->with('error', 'Unauthorized');
+      return response()->json(['error' => 'Unauthorized'], 403);
     }
 
     $request->validate(Note::validateNote());
@@ -50,15 +47,9 @@ class NoteService
       'user_id' => auth()->id(),
     ]);
 
-    return redirect()->back()->with('message', 'Note created successfully');
-  }
+    return redirect()->route('index')->with('message', 'Nota creada correctamente');
+}
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\Note  $note
-   * @return \Illuminate\Http\Response
-   */
   public function show(int $id)
   {
 
@@ -75,6 +66,27 @@ class NoteService
     return redirect()->back()->with('note', $note);
   }
 
+  public function create()
+  {
+
+    if (!auth()->check()) {
+      return redirect()->route('login')->with('error', 'Unauthorized');
+    }
+
+    return view('notes.create');
+  }
+
+  public function edit(Note $note)
+  {
+
+    if ($note->user_id !== auth()->id()) {
+      return redirect()->back()->with('error', 'Unauthorized');
+    }
+
+
+    return view('notes.edit', compact('note'));
+  }
+
   public function update(Request $request, Note $note)
   {
     if ($note->user_id !== auth()->id()) {
@@ -89,18 +101,20 @@ class NoteService
         'pinned' => $request->pinned,
         'reminder' => $request->reminder,
     ]);
-    return redirect()->back()->with('message', 'Note updated successfully');
+    return redirect()->route('index', $note->id)->with('message', 'Note updated successfully');
   }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\Note  $note
-   * @return \Illuminate\Http\Response
-   */
-  public function destroy(Note $note)
+
+  public function destroy($id)
   {
-    //
+    $note = Note::findOrFail($id);
+
+    if ($note->user_id !== auth()->id()) {
+      return redirect()->back()->with('error', 'Unauthorized');
+    }
+
+    $note->delete();
+    return redirect()->route('index')->with('message', 'Note deleted successfully');
   }
 
 }

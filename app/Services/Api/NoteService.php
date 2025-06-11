@@ -100,7 +100,12 @@ class NoteService
    */
   public function destroy(Note $note)
   {
-    //
+    if ($note->user_id !== auth()->id()) {
+      return response()->json(['error' => 'Unauthorized'], 403);
+    }
+
+    $note->delete();
+    return response()->json(['message' => 'Note deleted successfully'], 200);
   }
 
 }

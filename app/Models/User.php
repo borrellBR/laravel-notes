@@ -50,11 +50,11 @@ public static function loginRules(): array
     public static function updateRules(): array
     {
         return [
-'name'     => 'required|string|max:255',
+        'name'     => 'required|string|max:255',
         'lastname' => 'required|string|max:255',
         'email'    => 'required|string|email|unique:users,email,' . auth()->id(),
-        'password' => 'nullable|string|min:6',
-        ];
+        'password' => 'nullable|string|min:6'
+    ];
     }
 
     public function notes()

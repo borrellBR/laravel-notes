@@ -7,8 +7,10 @@
     <title>Document</title>
 </head>
 <body>
+    @include ('layouts.header')
 
-    <h1>Forgot Password</h1>
+
+    <h1>Ayudanos a Recuperar tu Contraseña</h1>
     <form method="POST" action="{{ route('forgot-password') }}">
         @csrf
         <div>

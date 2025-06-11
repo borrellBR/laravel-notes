@@ -24,9 +24,19 @@ class NoteController extends Controller
     return $this->noteService->store($request);
   }
 
+  public function create()
+  {
+    return view('notes.create');
+  }
+
   public function show($id)
   {
     return $this->noteService->show($id);
+  }
+
+  public function edit (Note $note)
+  {
+    return $this->noteService->edit($note);
   }
   public function update(Request $request, Note $note)
   {
@@ -34,5 +44,7 @@ class NoteController extends Controller
   }
   public function destroy($id)
   {
+    return $this->noteService->destroy($id);
   }
+
 }
