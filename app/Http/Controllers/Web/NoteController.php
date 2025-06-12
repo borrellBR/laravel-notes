@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
-  public function __construct(private NoteService $noteService)
+    protected $noteService;
+
+  public function __construct(NoteService $noteService)
   {
     $this->noteService = $noteService;
   }
@@ -18,15 +20,14 @@ class NoteController extends Controller
     return $this->noteService->index();
   }
 
-
   public function store(Request $request)
   {
     return $this->noteService->store($request);
   }
 
-  public function create()
+  public function create(Request $request)
   {
-    return view('notes.create');
+    return $this->noteService->create($request);
   }
 
   public function show($id)
@@ -38,6 +39,7 @@ class NoteController extends Controller
   {
     return $this->noteService->edit($note);
   }
+
   public function update(Request $request, Note $note)
   {
     return $this->noteService->update($request, $note);
@@ -46,6 +48,16 @@ class NoteController extends Controller
   public function destroy($id)
   {
     return $this->noteService->destroy($id);
+  }
+
+  public function pin(Note $note)
+  {
+ //implementar
+  }
+
+  public function unpin(Note $note)
+  {
+ //implementar
   }
 
 }

@@ -11,12 +11,12 @@
     <h1>Crear Nota</h1>
 
 
-<form method="POST" action="{{ route('notes.store') }}" enctype="multipart/form-data">>
+<form method="POST" action="{{ route('notes.store') }}" enctype="multipart/form-data">
     @csrf
 
     <label for="header">Encabezado</label>
     <input type="text" name="header" id="header" required>
-<br>
+    <br>
     <label for="text">Texto</label>
     <textarea name="text" id="text" required></textarea>
     <br>

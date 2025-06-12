@@ -16,9 +16,7 @@ class ForgotPasswordController extends Controller
 {
     public function sendResetLink(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-        ]);
+        $request->validate(User::emailRules());
 
         $token = Str::random(60);
 
@@ -34,12 +32,7 @@ class ForgotPasswordController extends Controller
 
     public function resetPassword(Request $request)
     {
-        $request->validate([
-            'email'    => 'required|email|exists:users,email',
-            'token'    => 'required|string',
-            'password' => 'required|string|min:6|confirmed',
-            'password_confirmation' => 'required|string|min:6',
-        ]);
+        $request->validate(User::resetPasswordRules());
 
         $reset = DB::table('password_resets')
             ->where('email', $request->email)
@@ -53,7 +46,6 @@ class ForgotPasswordController extends Controller
         $user = User::where('email', $request->email)->first();
         $user->update(['password' => Hash::make($request->password)]);
 
-        // Eliminar token usado
         DB::table('password_resets')->where('email', $request->email)->delete();
 
         return redirect()->route('login')->with('status', 'Tu contraseña ha sido restablecida correctamente. Ahora puedes iniciar sesión con tu nueva contraseña.');

@@ -51,7 +51,6 @@ class AuthService
               ->with('status', 'No estás autenticado');
       }
 
-      // Revoca todos los tokens activos del usuario (simple y efectivo)
       $user->tokens->each->revoke();
 
       return redirect()

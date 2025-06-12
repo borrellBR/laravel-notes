@@ -10,6 +10,7 @@ class AuthService
 {
   public function register(array $data): JsonResponse
   {
+
     $user = User::create([
       'name' => $data['name'],
       'lastname' => $data['lastname'],
@@ -54,7 +55,6 @@ class AuthService
           return response()->json(['error' => 'No autenticado'], 401);
       }
 
-      // Revoca todos los tokens activos del usuario (simple y efectivo)
       $user->tokens->each->revoke();
 
       return response()->json(['message' => 'Logout exitoso'], 200);

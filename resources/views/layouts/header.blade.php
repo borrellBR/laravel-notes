@@ -10,7 +10,8 @@
     <a href ="{{ route('index') }}">Inicio</a>
     <a href ="{{ route('index') }}">Scrible</a>
 
-    <a href="{{ route('edit-profile') }}">Editar Perfil</a>
+    <a href="{{ route('edit-profile.get') }}">Editar perfil</a>
+
 
     <form method="POST" action="{{ route('logout') }}">
         @csrf

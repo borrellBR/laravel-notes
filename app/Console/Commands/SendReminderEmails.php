@@ -15,7 +15,7 @@ class SendReminderEmails extends Command
 
     public function handle()
     {
-        $today =now()->toDateString();
+        $today = now()->toDateString();
         $notes = Note::whereDate('reminder', $today)->get();
 
         foreach ($notes as $note) {

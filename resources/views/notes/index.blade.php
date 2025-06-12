@@ -26,7 +26,7 @@
 
         <div>
             @foreach ($note->images as $image)
-                <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota">
+                <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota" style="max-width: 300px; max-height: 300px;">
             @endforeach
         </div>
 

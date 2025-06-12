@@ -54,7 +54,24 @@ public static function loginRules(): array
         'lastname' => 'required|string|max:255',
         'email'    => 'required|string|email|unique:users,email,' . auth()->id(),
         'password' => 'nullable|string|min:6'
-    ];
+        ];
+    }
+
+    public static function emailRules(): array
+    {
+        return [
+            'email' => 'required|email|unique:users,email,' . auth()->id(),
+        ];
+    }
+
+    public static function resetPasswordRules(): array
+    {
+        return [
+            'email' => 'required|email|exists:users,email',
+            'token' => 'required|string',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required|string|min:6',
+        ];
     }
 
     public function notes()

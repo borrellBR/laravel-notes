@@ -9,7 +9,9 @@ use App\Models\Note;
 
 class NoteController extends Controller
 {
-  public function __construct(private NoteService $noteService)
+    protected $noteService;
+
+  public function __construct(NoteService $noteService)
   {
     $this->noteService = $noteService;
   }
@@ -18,7 +20,6 @@ class NoteController extends Controller
   {
     return $this->noteService->index();
   }
-
 
   public function store(Request $request)
   {
@@ -29,10 +30,12 @@ class NoteController extends Controller
   {
     return $this->noteService->show($id);
   }
+
   public function update(Request $request, Note $note)
   {
     return $this->noteService->update($request, $note);
   }
+
   public function destroy($id)
   {
     $note = Note::findOrFail($id);
