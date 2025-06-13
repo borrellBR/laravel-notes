@@ -18,27 +18,29 @@ class NoteController extends Controller
 
   public function index()
   {
-    return $this->noteService->index();
-  }
+    return response()->json(['notes' => $this->noteService->index()]);
+}
 
   public function store(Request $request)
   {
-    return $this->noteService->store($request);
-  }
+    $note = $this->noteService->store($request);
+    return response()->json(['note' => $note], 201);  }
 
   public function show($id)
   {
-    return $this->noteService->show($id);
-  }
+    return response()->json(['note' => $this->noteService->show($id)]);
+}
 
   public function update(Request $request, Note $note)
   {
-    return $this->noteService->update($request, $note);
+    $updated = $this->noteService->update($request, $note);
+    return response()->json(['note' => $updated]);
+
   }
 
-  public function destroy($id)
+  public function destroy(Note $note)
   {
-    $note = Note::findOrFail($id);
-    return $this->noteService->destroy($note);
-  }
+    $this->noteService->destroy($note);
+    return response()->json(['message' => 'Note deleted successfully']);
+}
 }

@@ -6,45 +6,48 @@ use Illuminate\Http\JsonResponse;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Auth\Access\AuthorizationException;
 class UserService
 {
 
-    public function editProfile($user)
+    public function update(Request $request, User $user): User
     {
-        return view('user.edit-profile', compact('user'));
-    }
-
-    public function update(Request $request, User $user)
-    {
-        $user = auth()->user();
+        $this->requireOwner($user);
 
         $data = $request->validate(User::updateRules());
-
         $user->update($data);
 
-        return redirect()->route('index')->with('message', 'Perfil actualizado correctamente');
+        return $user;
     }
 
 
+
+    public function destroy($id)
+    {
+        // no implementado por ahora
+    }
 
     public function changePassword(Request $request)
-{
-    $request->validate(user::changePasswordRules());
+    {
+        $request->validate(User::changePasswordRules());
 
-    $user = auth()->user();
+        $user = auth()->user();
 
-    if (!Hash::check($request->current_password, $user->password)) {
-        return redirect()->back()->with('error', 'La contraseña actual es incorrecta');
+        if (! Hash::check($request->current_password, $user->password)) {
+            throw new AuthorizationException('La contraseña actual es incorrecta');
+        }
+
+        if (Hash::check($request->new_password, $user->password)) {
+            throw new AuthorizationException('La nueva contraseña no puede ser la misma que la actual');
+        }
+
+        $user->update(['password' => Hash::make($request->new_password)]);
     }
 
-    if (Hash::check($request->new_password, $user->password)) {
-        return redirect()->back()->with('error', 'La nueva contraseña no puede ser la misma que la actual');
+    private function requireOwner(User $user): void
+    {
+        if ($user->id !== auth()->id()) {
+            throw new AuthorizationException('Unauthorized');
+        }
     }
-
-    $user->password = Hash::make($request->new_password);
-    $user->save();
-
-    return redirect()->back()->with('message', 'Contraseña cambiada exitosamente');
-}
 }

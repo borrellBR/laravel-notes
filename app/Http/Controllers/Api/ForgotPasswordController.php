@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\Api\ForgotPasswordService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -12,19 +13,19 @@ use App\Mail\ResetPasswordMail;
 
 class ForgotPasswordController extends Controller
 {
+
+    protected $ForgotPasswordService;
+
+    public function __construct(ForgotPasswordService $ForgotPasswordService)
+    {
+      $this->ForgotPasswordService = $ForgotPasswordService;
+    }
+
     public function sendResetLink(Request $request)
     {
         $request->validate(User::emailRules());
 
-        $token = Str::random(60);
-
-        DB::table('password_resets')->updateOrInsert(
-            ['email' => $request->email],
-            ['token' => $token, 'created_at' => now()]
-        );
-
-        Mail::to($request->email)->send(new ResetPasswordMail($token));
-
+        $this->ForgotPasswordService->sendResetLink($request->email);
         return response()->json(['message' => 'Correo de recuperación enviado.'], 200);
     }
 
@@ -32,19 +33,7 @@ class ForgotPasswordController extends Controller
     {
         $request->validate(User::resetPasswordRules());
 
-        $reset = DB::table('password_resets')
-            ->where('email', $request->email)
-            ->where('token', $request->token)
-            ->first();
-
-        if (!$reset) {
-            return response()->json(['error' => 'Token inválido.'], 400);
-        }
-
-        $user = User::where('email', $request->email)->first();
-        $user->update(['password' => Hash::make($request->password)]);
-
-        DB::table('password_resets')->where('email', $request->email)->delete();
+        $this->ForgotPasswordService->resetPassword($request->email, $request->token, $request->password);
 
         return response()->json(['message' => 'Contraseña actualizada correctamente.']);
     }

@@ -30,6 +30,7 @@
             @endforeach
         </div>
 
+
         <form method="POST" action="{{ route('notes.destroy', $note->id) }}">
             @csrf
             @method('DELETE')

@@ -5,59 +5,88 @@ namespace App\Services\Api;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthService
 {
-  public function register(array $data): JsonResponse
-  {
+    public function register(array $data): array
+    {
+        $validator = Validator::make($data, User::registerRules());
+        if ($validator->fails()) {
+            return [
+                'status' => 422,
+                'errors' => $validator->errors(),
+            ];
+        }
 
-    $user = User::create([
-      'name' => $data['name'],
-      'lastname' => $data['lastname'],
-      'email' => $data['email'],
-      'password' => Hash::make($data['password']),
-    ]);
+        $user = User::create([
+            'name'     => $data['name'],
+            'lastname' => $data['lastname'],
+            'email'    => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
 
-    $token = $user->createToken('MyApp')->accessToken;
+        Auth::login($user);
+        $token = $user->createToken('MyApp')->accessToken;
 
-    return response()->json([
-      'message' => 'Registro exitoso',
-      'user' => $user,
-      'access_token' => $token,
-      'token_type' => 'Bearer',
-    ], 201);
-  }
-
-  public function login(array $data): JsonResponse
-  {
-    $user = User::where('email', $data['email'])->first();
-
-    if (!$user || !Hash::check($data['password'], $user->password)) {
-      return response()->json(['message' => 'Credenciales inválidas'], 401);
+        return [
+            'status'       => 201,
+            'message'      => 'Registro exitoso',
+            'user'         => $user,
+            'access_token' => $token,
+            'token_type'   => 'Bearer',
+        ];
     }
 
-    $tokenResult = $user->createToken('MyApp');
-    $token = $tokenResult->accessToken;
 
-    return response()->json([
-      'message' => 'Login exitoso',
-      'user' => $user,
-      'access_token' => $token,
-      'token_type' => 'Bearer',
-    ]);
-  }
-
-  public function logout(): JsonResponse
-    {
-      $user = auth()->user();
-
-      if (!$user) {
-          return response()->json(['error' => 'No autenticado'], 401);
+  public function login(array $data): array
+  {
+      $validator = Validator::make($data, User::loginRules());
+      if ($validator->fails()) {
+          return [
+              'status' => 422,
+              'errors' => $validator->errors(),
+          ];
       }
 
-      $user->tokens->each->revoke();
+      $user = User::where('email', $data['email'])->first();
+      if (!$user || !Hash::check($data['password'], $user->password)) {
+          return [
+              'status'  => 401,
+              'message' => 'Credenciales inválidas',
+          ];
+      }
 
-      return response()->json(['message' => 'Logout exitoso'], 200);
+      Auth::login($user);                                // web
+      $token = $user->createToken('MyApp')->accessToken; // api
+
+      return [
+          'status'       => 200,
+          'message'      => 'Login exitoso',
+          'user'         => $user,
+          'access_token' => $token,
+          'token_type'   => 'Bearer',
+      ];
+  }
+
+  public function logout(): array
+  {
+    $user = auth()->user();
+
+    if (! $user) {
+        return [
+            'status'  => 401,
+            'message' => 'No autenticado',
+        ];
     }
 
+
+    $user->tokens()->delete();
+
+    return [
+        'status'  => 200,
+        'message' => 'Logout exitoso',
+    ];
+  }
 }

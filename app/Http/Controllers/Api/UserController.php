@@ -17,11 +17,19 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        return $this->userService->update($request, $user);
+        $updated = $this->userService->update($request, $user);
+
+        return response()->json([
+            'message' => 'User updated successfully',
+            'user'    => $updated,
+        ]);
     }
 
     public function changePassword(Request $request){
-        return $this->userService->changePassword($request);
+        $this->userService->changePassword($request);
+        return response()->json([
+            'message' => 'Password changed successfully',
+        ]);
     }
 
     public function destroy($id)

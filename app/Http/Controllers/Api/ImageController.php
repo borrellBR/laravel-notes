@@ -19,12 +19,18 @@ class ImageController extends Controller
 
     public function index(Note $note)
     {
-        return $this->imageService->index($note);
+        $images = $this->imageService->index($note);
+
+        return response()->json(['images' => $images], 200);
     }
 
     public function store(Request $request, Note $note)
     {
-        return app(ImageService::class)->store($request, $note);
+        $request->validate(Image::validateImage());
+
+        $image = $this->imageService->store($request, $note);
+
+        return response()->json(['image' => $image], 201);
     }
 
     public function destroy(Image $image)

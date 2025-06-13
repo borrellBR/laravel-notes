@@ -10,43 +10,42 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Mail\ResetPasswordMail;
+use Illuminate\Validation\ValidationException;
 
 class ForgotPasswordService
 {
-    public function sendResetLink(Request $request)
+    public function sendResetLink(string $email): void
     {
-        $request->validate(User::emailRules());
-
         $token = Str::random(60);
 
         DB::table('password_resets')->updateOrInsert(
-            ['email' => $request->email],
+            ['email' => $email],
             ['token' => $token, 'created_at' => now()]
         );
 
-        Mail::to($request->email)->send(new ResetPasswordMail($token));
+        Mail::to($email)->send(new ResetPasswordMail($token));
 
-        return redirect()->back()->with('message', 'Correo de recuperación enviado.');
     }
 
-    public function resetPassword(Request $request)
+    public function resetPassword(string $email, string $token, string $password): void
     {
-        $request->validate(User::resetPasswordRules());
 
-        $reset = DB::table('password_resets')
-            ->where('email', $request->email)
-            ->where('token', $request->token)
+        $ok = DB::table('password_resets')
+            ->where('email', $email)
+            ->where('token', $token)
             ->first();
 
-        if (!$reset) {
-            return response()->json(['error' => 'Token inválido.'], 400);
-        }
+            if (! $ok) {
+                throw ValidationException::withMessages([
+                    'token' => 'Token inválido o expirado.',
+                ]);
+            }
 
-        $user = User::where('email', $request->email)->first();
-        $user->update(['password' => Hash::make($request->password)]);
 
-        DB::table('password_resets')->where('email', $request->email)->delete();
+        $user = User::where('email', $email)->first();
+        $user->update(['password' => Hash::make($password)]);
 
-        return redirect()->route('login')->with('message', 'Contraseña actualizada correctamente.');
+        DB::table('password_resets')->where('email', $email)->delete();
+
     }
 }

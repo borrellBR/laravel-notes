@@ -18,16 +18,27 @@ class AuthController extends Controller
   public function register(Request $request)
   {
     $data = $request->validate(User::registerRules());
-    return $this->authService->register($data);
-  }
+
+    $response = $this->authService->register($data);
+
+    return response()->json($response, $response['status']);
+    }
 
   public function login(Request $request)
   {
     $data = $request->validate(User::loginRules());
-    return $this->authService->login($data);
+    $response = $this->authService->login($data);
+
+    return response()->json($response, $response['status']);
   }
+
     public function logout(Request $request)
     {
-        return $this->authService->logout();
+        $response = $this->authService->logout();
+
+        return response()->json(
+            ['message' => $response['message']],
+            $response['status']
+        );
     }
 }

@@ -46,4 +46,3 @@ Route::middleware('auth:api')->post('/notes/{note}/images', [ImageController::cl
 Route::middleware('auth:api')->get('/notes/{note}/images', [ImageController::class, 'index']);
 
 Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
-

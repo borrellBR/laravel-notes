@@ -4,36 +4,37 @@ namespace App\Services\Api;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Note;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class ImageService
 {
 
     public function index(Note $note)
     {
-        if ($note->user_id !== auth()->id()) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        $images = $note->images()->get();
-
-        return response()->json(['images' => $images], 200);
+        $this->authorize($note);
+        return $note->images()->get();
     }
 
     public function store(Request $request, Note $note)
     {
-        if ($note->user_id !== auth()->id()) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
+        $this->authorize($note);
 
         $request->validate(Image::validateImage());
 
         $path = $request->file('image')->store('images', 'public');
 
-        $image = $note->images()->create([
-            'image_url' => asset('storage/' . $path),
-        ]);
+        $url  = asset('storage/'.$path);
 
-        return response()->json(['image' => $image], 201);
+        return $note->images()->create([
+            'image_url' => $url,
+        ]);
+    }
+
+    private function authorize(Note $note): void
+    {
+        if ($note->user_id !== auth()->id()) {
+            throw new AuthorizationException('Unauthorized');
+        }
     }
 
     public function destroy(Image $image)

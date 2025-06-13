@@ -69,12 +69,7 @@ Route::get("edit-profile", [UserController::class, 'editProfile'])->name('edit-p
 
 
 
-    Route::post('/logout', function (Request $request) {
-        auth('web')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-        return redirect()->route('login')->with('status', 'Sesión cerrada correctamente');
-    })->name('logout');
 
 });

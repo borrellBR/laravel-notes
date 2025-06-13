@@ -17,38 +17,49 @@ class NoteController extends Controller
 
   public function index()
   {
-    return $this->noteService->index();
+      $notes = $this->noteService->index();
+      return view('notes.index', compact('notes'));
   }
 
   public function store(Request $request)
   {
-    return $this->noteService->store($request);
+
+    $this->noteService->store($request);
+
+    return redirect()->route('index')
+                        ->with('message', 'Nota creada correctamente');
   }
 
   public function create(Request $request)
   {
-    return $this->noteService->create($request);
-  }
+    return view('notes.create');
+}
 
   public function show($id)
   {
-    return $this->noteService->show($id);
-  }
+    $note = $this->noteService->show($id);
+    return view('notes.show', compact('note'));
+}
 
   public function edit (Note $note)
   {
-    return $this->noteService->edit($note);
-  }
+    return view('notes.edit', compact('note'));
+}
 
   public function update(Request $request, Note $note)
   {
-    return $this->noteService->update($request, $note);
-  }
+    $this->noteService->update($request, $note);
 
-  public function destroy($id)
+    return redirect()->route('index')
+                     ->with('message', 'Nota actualizada');
+}
+
+  public function destroy(Note $note)
   {
-    return $this->noteService->destroy($id);
-  }
+    $this->noteService->destroy($note);
+    return redirect()->route('index')
+                     ->with('message', 'Nota eliminada correctamente');
+}
 
   public function pin(Note $note)
   {

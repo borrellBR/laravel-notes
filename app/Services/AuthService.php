@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Services\Web;
+namespace App\Services\Api;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
+
 class AuthService
 {
     public function register(array $data): array
@@ -69,6 +70,7 @@ class AuthService
       ];
   }
 
+
   public function logout(): array
   {
     $user = auth()->user();
@@ -80,7 +82,6 @@ class AuthService
         ];
     }
 
-
     $user->tokens()->delete();
 
     return [
@@ -88,4 +89,5 @@ class AuthService
         'message' => 'Logout exitoso',
     ];
   }
+
 }
