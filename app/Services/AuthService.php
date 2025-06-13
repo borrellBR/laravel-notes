@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Services\Api;
+namespace App\Services;
+
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -70,7 +71,6 @@ class AuthService
       ];
   }
 
-
   public function logout(): array
   {
     $user = auth()->user();
@@ -82,6 +82,7 @@ class AuthService
         ];
     }
 
+
     $user->tokens()->delete();
 
     return [
@@ -89,5 +90,4 @@ class AuthService
         'message' => 'Logout exitoso',
     ];
   }
-
 }

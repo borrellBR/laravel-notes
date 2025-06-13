@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Mail\ResetPasswordMail;
-use App\Services\Web\ForgotPasswordService;
+use App\Services\ForgotPasswordService;
 
 class ForgotPasswordController extends Controller
 {

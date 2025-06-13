@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-use App\Services\Web\ImageService;
+use App\Services\ImageService;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Note;

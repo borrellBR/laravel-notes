@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\Api\ImageService;
+use App\Services\ImageService;
 use App\Models\Image;
 use App\Models\Note;
 use Illuminate\Http\Request;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-use App\Services\Web\UserService;
+use App\Services\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Access\AuthorizationException;

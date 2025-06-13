@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\Api\NoteService;
+use App\Services\NoteService;
 use Illuminate\Http\Request;
 use App\Models\Note;
 
@@ -26,10 +26,10 @@ class NoteController extends Controller
     $note = $this->noteService->store($request);
     return response()->json(['note' => $note], 201);  }
 
-  public function show($id)
+  public function show(Note $note)
   {
-    return response()->json(['note' => $this->noteService->show($id)]);
-}
+    return response()->json(['note' => $this->noteService->show($note)]);
+  }
 
   public function update(Request $request, Note $note)
   {
