@@ -15,9 +15,7 @@ class ForgotPasswordService
 {
     public function sendResetLink(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-        ]);
+        $request->validate(User::emailRules());
 
         $token = Str::random(60);
 
@@ -33,12 +31,7 @@ class ForgotPasswordService
 
     public function resetPassword(Request $request)
     {
-        $request->validate([
-            'email'    => 'required|email|exists:users,email',
-            'token'    => 'required|string',
-            'password' => 'required|string|min:6|confirmed',
-            'password_confirmation' => 'required|string|min:6',
-        ]);
+        $request->validate(User::resetPasswordRules());
 
         $reset = DB::table('password_resets')
             ->where('email', $request->email)

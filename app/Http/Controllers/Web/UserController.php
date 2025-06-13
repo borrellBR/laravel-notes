@@ -15,9 +15,9 @@ class UserController extends Controller
     }
 
     public function editProfile()
-{
-    return $this->userService->editProfile(auth()->user());
-}
+    {
+      return $this->userService->editProfile(auth()->user());
+    }
 
 
 

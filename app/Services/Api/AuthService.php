@@ -48,7 +48,7 @@ class AuthService
   }
 
   public function logout(): JsonResponse
-  {
+    {
       $user = auth()->user();
 
       if (!$user) {
@@ -58,6 +58,6 @@ class AuthService
       $user->tokens->each->revoke();
 
       return response()->json(['message' => 'Logout exitoso'], 200);
-  }
+    }
 
 }

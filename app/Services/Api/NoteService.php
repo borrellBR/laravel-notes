@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class NoteService
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
+
   public function index()
   {
     if (!auth()->check()) {
@@ -29,6 +25,7 @@ class NoteService
     ->orderBy('pinned', 'desc')
     ->orderBy('created_at', 'desc')
     ->get();
+
     return response()->json(['notes' => $notes], 200);
   }
 
@@ -52,12 +49,6 @@ class NoteService
     return response()->json(['message' => 'Note created successfully'], 201);
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\Note  $note
-   * @return \Illuminate\Http\Response
-   */
   public function show(int $id)
   {
 
@@ -92,12 +83,6 @@ class NoteService
     return response()->json(['note' => $note], 200);
   }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\Note  $note
-   * @return \Illuminate\Http\Response
-   */
   public function destroy(Note $note)
   {
     if ($note->user_id !== auth()->id()) {

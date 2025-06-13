@@ -14,6 +14,13 @@ class Image extends Model
         'note_id',
     ];
 
+    public static function validateImage(): array
+    {
+        return [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ];
+    }
+
     public function note()
     {
         return $this->belongsTo(Note::class);

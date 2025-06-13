@@ -10,23 +10,16 @@ use Illuminate\Support\Facades\Hash;
 class UserService
 {
 
-
     public function editProfile($user)
     {
         return view('user.edit-profile', compact('user'));
     }
 
-
     public function update(Request $request, User $user)
     {
         $user = auth()->user();
 
-        $data = $request->validate([
-            'name'     => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email'    => 'required|string|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:6',
-        ]);
+        $data = $request->validate(User::updateRules());
 
         $user->update($data);
 
@@ -37,11 +30,7 @@ class UserService
 
     public function changePassword(Request $request)
 {
-    $request->validate([
-        'current_password' => 'required|string',
-        'new_password'     => 'required|string|min:6|confirmed',
-        'new_password_confirmation' => 'required|string|min:6',
-    ]);
+    $request->validate(user::changePasswordRules());
 
     $user = auth()->user();
 

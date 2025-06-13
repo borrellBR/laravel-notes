@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,7 +59,7 @@ public static function loginRules(): array
     public static function emailRules(): array
     {
         return [
-            'email' => 'required|email|unique:users,email,' . auth()->id(),
+            'email' => 'required|email|exists:users,email',
         ];
     }
 
@@ -71,6 +70,15 @@ public static function loginRules(): array
             'token' => 'required|string',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required|string|min:6',
+        ];
+    }
+
+    public static function changePasswordRules(): array
+    {
+        return [
+            'current_password' => 'required|string',
+            'new_password'     => 'required|string|min:6|confirmed',
+            'new_password_confirmation' => 'required|string|min:6',
         ];
     }
 
