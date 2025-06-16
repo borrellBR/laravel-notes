@@ -25,22 +25,25 @@ Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword']);
 
 
+Route::middleware('auth:api')->put('/users/{user}', [UserController::class, 'update']);
+
+
+Route::middleware('auth:api')->post('/change-password', [UserController::class, 'changePassword']);
+
+
+
+
+Route::middleware('auth:api')->post('/notes', [NoteController::class, 'store']);
+Route::middleware('auth:api')->get('/notes', [NoteController::class, 'index']);
+Route::middleware('auth:api')->get('/notes/{note}', [NoteController::class, 'show']);
+Route::middleware('auth:api')->put('/notes/{note}', [NoteController::class, 'update']);
+Route::middleware('auth:api')->delete('/notes/{note}', [NoteController::class, 'destroy']);
+Route::middleware('auth:api')->post('/notes/{note}/images', [ImageController::class, 'store']);
+Route::middleware('auth:api')->get('/notes/{note}/images', [ImageController::class, 'index']);
+
+Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth')->group(function () {
 
-    Route::put('/users/{user}', [UserController::class, 'update']);
-    Route::post('/change-password', [UserController::class, 'changePassword']);
-
-
-    Route::post('/notes', [NoteController::class, 'store']);
-    Route::get('/notes', [NoteController::class, 'index']);
-    Route::get('/notes/{note}', [NoteController::class, 'show']);
-    Route::put('/notes/{note}', [NoteController::class, 'update']);
-    Route::delete('/notes/{note}', [NoteController::class, 'destroy']);
-    Route::post('/notes/{note}/images', [ImageController::class, 'store']);
-    Route::get('/notes/{note}/images', [ImageController::class, 'index']);
-
-
-    Route::post('/logout', [AuthController::class, 'logout']);
-
 });
+

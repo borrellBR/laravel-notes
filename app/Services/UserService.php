@@ -12,11 +12,10 @@ use Illuminate\Http\Request;
 class UserService
 {
 
-    public function update(Request $request, User $user): User
+    public function update(User $user, array $data): User
     {
         $this->requireOwner($user);
 
-        $data = $request->validate(User::updateRules());
         $user->update($data);
 
         return $user;
@@ -27,21 +26,21 @@ class UserService
         // no implementado por ahora
     }
 
-    public function changePassword(Request $request)
+    public function changePassword(User $user, array $data): void
     {
-        $request->validate(User::changePasswordRules());
 
-        $user = auth()->user();
+            if (!Hash::check($data['current_password'], $user->password)) {
+                abort(403,'La contraseña actual es incorrecta.');
+            }
 
-        if (! Hash::check($request->current_password, $user->password)) {
-            abort(403,'La contraseña actual es incorrecta.');
-        }
+            if ($data['current_password'] === $data['new_password']) {
+                abort(403,'La nueva contraseña no peude se la misma que la actual');
+            }
 
-        if (Hash::check($request->new_password, $user->password)) {
-            abort(403,'La nueva contaraseña no peude se la misma que la actual');
-        }
+            $user->update([
+                'password' => Hash::make($data['new_password']),
+            ]);
 
-        $user->update(['password' => Hash::make($request->new_password)]);
     }
 
     private function requireOwner(User $user): void

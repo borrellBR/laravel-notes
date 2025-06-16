@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -22,20 +22,25 @@ class UserController extends Controller
 
 
 
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        $this->userService->update($request, auth()->user()); // pásale el usuario logueado
+        $data = $request->validate(User::updateRules());
+        $user = auth()->user();
+        $this->userService->update($user, $data);
 
+
+        $this->userService->update($user, $data);
         return redirect()->route('index')
                          ->with('message', 'Perfil actualizado correctamente');
     }
 
     public function changePassword(Request $request){
-        $this->userService->changePassword($request);
+        $data =  $request->validate(User::changePasswordRules());
+
+        $this->userService->changePassword(Auth::user(),$data);
 
         return back()->with('message', 'Contraseña cambiada correctamente');
     }
-
 
     public function destroy($id)
     {

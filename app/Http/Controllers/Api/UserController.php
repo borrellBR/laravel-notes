@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -17,7 +19,10 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $updated = $this->userService->update($request, $user);
+        $data = $request->validate(User::updateRules());
+        $user = auth()->user();
+
+        $updated = $this->userService->update($user, $data);
 
         return response()->json([
             'message' => 'User updated successfully',
@@ -25,8 +30,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function changePassword(Request $request){
-        $this->userService->changePassword($request);
+    public function changePassword(Request $request)
+    {
+        $data =  $request->validate(User::changePasswordRules());
+
+        $this->userService->changePassword(Auth::user(),$data);
+
         return response()->json([
             'message' => 'Password changed successfully',
         ]);
