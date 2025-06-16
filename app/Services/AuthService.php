@@ -28,7 +28,9 @@ class AuthService
             'password' => Hash::make($data['password']),
         ]);
 
-        return $this-> login($data);
+        $response = $this-> login($data);
+        $response ['status'] = 201;
+        return $response;
     }
 
 
