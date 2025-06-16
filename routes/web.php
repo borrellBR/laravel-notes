@@ -56,20 +56,14 @@ Route::middleware('auth')->group(function () {
     Route::put('notes/{note}', [NoteController::class, 'update'])->name('notes.update');
     Route::delete('notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
     Route::get('notes/{note}', [NoteController::class, 'show'])->name('notes.show');
+    Route::post('notes', [NoteController::class, 'store'])->name('notes.store');
 
-    Route::patch('notes/{note}/pin', [NoteController::class, 'pin'])->name('notes.pin');
-
-
-Route::post('notes', [NoteController::class, 'store'])->name('notes.store');
 
     Route::put("edit-profile", [UserController::class, 'update']) ->name('edit-profile.put');
+    Route::get("edit-profile", [UserController::class, 'editProfile'])->name('edit-profile.get');
 
 
-Route::get("edit-profile", [UserController::class, 'editProfile'])->name('edit-profile.get');
-
-
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 });
