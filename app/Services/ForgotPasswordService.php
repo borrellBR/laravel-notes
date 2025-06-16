@@ -40,7 +40,6 @@ class ForgotPasswordService
                 ]);
             }
 
-
         $user = User::where('email', $email)->first();
         $user->update(['password' => Hash::make($password)]);
 

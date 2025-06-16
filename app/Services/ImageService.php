@@ -6,6 +6,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Note;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\UploadedFile;
 
 class ImageService
 {
@@ -16,13 +17,9 @@ class ImageService
         return $note->images()->get();
     }
 
-    public function store(Request $request, Note $note)
+    public function store(Note $note, UploadedFile $image)
     {
-        $this->authorize($note);
-
-        $request->validate(Image::validateImage());
-
-        $path = $request->file('image')->store('images', 'public');
+        $path = $image->file('image')->store('images', 'public');
 
         $url  = asset('storage/'.$path);
 
@@ -30,6 +27,18 @@ class ImageService
             'image_url' => $url,
         ]);
     }
+
+
+    // public function store(array $data, Request $request) {
+
+    //     $note = Note::create($data + ['user_id' => auth()->id()]);
+
+    //     if ($request->hasFile('image')) {
+    //         $path = $request->file('image')->store('images', 'public');
+    //         $note->images()->create(['image_url' => $path]);
+    //     }
+    //  return $note;
+    // }
 
     private function authorize(Note $note): void
     {

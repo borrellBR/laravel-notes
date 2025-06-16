@@ -22,7 +22,7 @@ class AuthController extends Controller
     $response = $this->authService->register($data);
 
     return response()->json($response, $response['status']);
-    }
+  }
 
   public function login(Request $request)
   {

@@ -25,13 +25,17 @@ class ImageController extends Controller
 
     public function store(Request $request, Note $note)
     {
+        $this->authorize($note);
+
         $request->validate(Image::validateImage());
 
-        $image = $this->imageService->store($request, $note);
+        $image = $request->file('image');
+
+        $savedImage = $this->imageService->store($note, $image);
 
         return back()
             ->with('message', 'Imagen subida correctamente')
-            ->with('image', $image);
+            ->with('image', $savedImage);
     }
 
     public function destroy(Image $image)

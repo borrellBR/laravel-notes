@@ -23,8 +23,11 @@ class NoteController extends Controller
 
   public function store(Request $request)
   {
-    $note = $this->noteService->store($request);
-    return response()->json(['note' => $note], 201);  }
+    $data = $request -> validate(Note::validateNote());
+    $note = $this->noteService->store($data, $request);
+
+    return response()->json(['note' => $note], 201);
+  }
 
   public function show(Note $note)
   {
@@ -33,7 +36,10 @@ class NoteController extends Controller
 
   public function update(Request $request, Note $note)
   {
-    $updated = $this->noteService->update($request, $note);
+    $data = $request->validate(Note::validateNote());
+    $image = $request->file('image');
+
+    $updated = $this->noteService->update($data, $note, $image);
     return response()->json(['note' => $updated]);
 
   }

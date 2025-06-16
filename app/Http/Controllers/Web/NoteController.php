@@ -23,14 +23,14 @@ class NoteController extends Controller
 
   public function store(Request $request)
   {
-
-    $this->noteService->store($request);
+    $data = $request -> validate(Note::validateNote());
+    $this->noteService->store($data, $request);
 
     return redirect()->route('index')
                         ->with('message', 'Nota creada correctamente');
   }
 
-  public function create(Request $request)
+  public function create()
   {
     return view('notes.create');
 }
@@ -48,7 +48,10 @@ class NoteController extends Controller
 
   public function update(Request $request, Note $note)
   {
-    $this->noteService->update($request, $note);
+    $data = $request->validate(Note::validateNote());
+    $image = $request->file('image');
+
+    $this->noteService->update($data, $note, $image);
 
     return redirect()->route('index')
                      ->with('message', 'Nota actualizada');

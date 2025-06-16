@@ -28,16 +28,7 @@ class AuthService
             'password' => Hash::make($data['password']),
         ]);
 
-        Auth::login($user);
-        $token = $user->createToken('MyApp')->accessToken;
-
-        return [
-            'status'       => 201,
-            'message'      => 'Registro exitoso',
-            'user'         => $user,
-            'access_token' => $token,
-            'token_type'   => 'Bearer',
-        ];
+        return $this-> login($data);
     }
 
 
@@ -82,8 +73,12 @@ class AuthService
         ];
     }
 
-
     $user->tokens()->delete();
+
+    Auth::guard('web')->logout();
+        session()->invalidate();
+        session()->regenerateToken(); //token csrf, nada que ver con user
+
 
     return [
         'status'  => 200,

@@ -30,7 +30,7 @@ class AuthController extends Controller
         return redirect()
           ->route('index')
           ->with('status', 'Registro exitoso');
-      }
+        }
 
 
     public function login(Request $request)
@@ -49,10 +49,6 @@ class AuthController extends Controller
     public function logout()
     {
         $response = $this->authService->logout();
-
-        Auth::guard('web')->logout();
-        session()->invalidate();
-        session()->regenerateToken();
 
         return redirect()
             ->route('login')
