@@ -42,16 +42,15 @@ class AuthService
           ];
       }
 
-      $user = User::where('email', $data['email'])->first();
-      if (!$user || !Hash::check($data['password'], $user->password)) {
-          return [
-              'status'  => 401,
-              'message' => 'Credenciales inválidas',
-          ];
-      }
+      if (!Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+        return [
+            'status'  => 401,
+            'message' => 'Credenciales inválidas',
+        ];
+    }
 
-      Auth::login($user);                                // web
-      $token = $user->createToken('MyApp')->accessToken; // api
+    $user = Auth::user();
+    $token = $user->createToken('MyApp')->accessToken; // api
 
       return [
           'status'       => 200,

@@ -19,7 +19,9 @@ class ImageService
 
     public function store(Note $note, UploadedFile $image)
     {
-        $path = $image->file('image')->store('images', 'public');
+        $this->authorize($note);
+
+        $path = $image->store('images', 'public');
 
         $url  = asset('storage/'.$path);
 
@@ -27,18 +29,6 @@ class ImageService
             'image_url' => $url,
         ]);
     }
-
-
-    // public function store(array $data, Request $request) {
-
-    //     $note = Note::create($data + ['user_id' => auth()->id()]);
-
-    //     if ($request->hasFile('image')) {
-    //         $path = $request->file('image')->store('images', 'public');
-    //         $note->images()->create(['image_url' => $path]);
-    //     }
-    //  return $note;
-    // }
 
     private function authorize(Note $note): void
     {

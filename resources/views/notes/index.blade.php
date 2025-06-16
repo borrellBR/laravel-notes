@@ -8,7 +8,7 @@
 </head>
 <body>
 @include ('layouts.header')
-    <p>AQUI IRA LA SEARCHBAR QUE AUN NO ESTA HECHA</p>
+    <p>ESPACIO PARA SEARCHBAR</p>
     <h2>Mis notas</h2>
     <a href="{{ route('notes.create') }}">Crear Nota</a>
     <ul>

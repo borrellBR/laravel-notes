@@ -28,9 +28,10 @@ class ImageController extends Controller
     {
         $request->validate(Image::validateImage());
 
-        $image = $this->imageService->store($request, $note);
+        $image = $request->file('image');
+        $savedImage = $this->imageService->store($note, $image);
 
-        return response()->json(['image' => $image], 201);
+        return response()->json(['image' => $savedImage], 201);
     }
 
     public function destroy(Image $image)

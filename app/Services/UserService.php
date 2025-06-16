@@ -22,8 +22,6 @@ class UserService
         return $user;
     }
 
-
-
     public function destroy($id)
     {
         // no implementado por ahora
@@ -36,11 +34,11 @@ class UserService
         $user = auth()->user();
 
         if (! Hash::check($request->current_password, $user->password)) {
-            throw new AuthorizationException('La contraseña actual es incorrecta');
+            abort(403,'La contraseña actual es incorrecta.');
         }
 
         if (Hash::check($request->new_password, $user->password)) {
-            throw new AuthorizationException('La nueva contraseña no puede ser la misma que la actual');
+            abort(403,'La nueva contaraseña no peude se la misma que la actual');
         }
 
         $user->update(['password' => Hash::make($request->new_password)]);
@@ -49,7 +47,7 @@ class UserService
     private function requireOwner(User $user): void
     {
         if ($user->id !== auth()->id()) {
-            throw new AuthorizationException('Unauthorized');
+            abort(403,'Unauthorized');
         }
     }
 }

@@ -36,4 +36,5 @@ class UserController extends Controller
     {
         // por si quiero boton de eliminar cuenta
     }
+
 }

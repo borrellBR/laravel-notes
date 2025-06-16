@@ -25,8 +25,6 @@ class ImageController extends Controller
 
     public function store(Request $request, Note $note)
     {
-        $this->authorize($note);
-
         $request->validate(Image::validateImage());
 
         $image = $request->file('image');
