@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
@@ -24,6 +25,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink']);
 Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword']);
 
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::middleware('auth:api')->put('/users/{user}', [UserController::class, 'update']);
 
@@ -42,8 +46,3 @@ Route::middleware('auth:api')->post('/notes/{note}/images', [ImageController::cl
 Route::middleware('auth:api')->get('/notes/{note}/images', [ImageController::class, 'index']);
 
 Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
-
-Route::middleware('auth')->group(function () {
-
-});
-
