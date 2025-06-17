@@ -26,7 +26,7 @@ class AuthService
 
   public function login(array $data): array
   {
-      if (!Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+      if (! Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
         return [
             'status'  => 401,
             'message' => 'Credenciales inválidas',

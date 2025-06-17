@@ -25,26 +25,20 @@ class UserService
         return $user;
     }
 
-        public function destroy($id)
-        {
-            // no implementado por ahora
-        }
+    public function destroy($id)
+    {
+        // no implementado por ahora
+    }
 
     public function changePassword(User $user, array $data): void
     {
 
-            if (!Hash::check($data['current_password'], $user->password)) {
-                abort(403,'La contraseña actual es incorrecta.');
-            }
+        $this -> checkCurrentPassword($user, $data);
+        $this -> checkForDifferentPassword($user, $data);
 
-
-            if ($data['current_password'] === $data['new_password']) {
-                abort(403,'La nueva contraseña no peude se la misma que la actual');
-            }
-
-            $user->update([
-                'password' => Hash::make($data['new_password']),
-            ]);
+        $user->update([
+            'password' => Hash::make($data['new_password']),
+        ]);
 
     }
 
@@ -52,6 +46,18 @@ class UserService
     {
         if ($user->id !== auth()->id()) {
             abort(403,'Unauthorized');
+        }
+    }
+
+    private function checkCurrentPassword(User $user, array $data){
+        if (! Hash::check($data['current_password'], $user->password)) {
+            abort(403,'La contraseña actual es incorrecta.');
+        }
+    }
+
+    private function checkForDifferentPassword(User $user, array $data){
+        if ($data['current_password'] === $data['new_password']) {
+            abort(403,'La nueva contraseña no peude se la misma que la actual');
         }
     }
 }
