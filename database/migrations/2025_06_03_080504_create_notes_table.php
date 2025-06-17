@@ -22,9 +22,8 @@ return new class extends Migration
             $table->boolean('pinned')->default(false);
             $table->dateTime('reminder')->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('user_id');
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table -> foreignId('user_id') -> constrained()->onUpdate('cascade')->onDelete('cascade');
 
         });
     }

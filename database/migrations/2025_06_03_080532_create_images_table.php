@@ -17,9 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('image_url');
             $table->timestamps();
-            $table->unsignedBigInteger('note_id');
 
-            $table->foreign('note_id')->references('id')->on('notes')->onDelete('cascade');
+            $table -> foreignId('user_id') -> constrained() -> onUpdate('cascade') -> onDelete('cascade');
 
         });
     }

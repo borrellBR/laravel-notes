@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Note;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Http\UploadedFile;

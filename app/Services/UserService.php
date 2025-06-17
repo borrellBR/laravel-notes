@@ -4,10 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Auth\Access\AuthorizationException;
 
-use Illuminate\Http\Request;
 
 class UserService
 {

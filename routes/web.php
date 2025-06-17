@@ -1,23 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\NoteController;
 use App\Http\Controllers\Web\ImageController;
 use App\Http\Controllers\Web\ForgotPasswordController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // NO AUTHENTICATION
 
@@ -38,32 +27,34 @@ Route::get("reset-password/{token}", function ($token) {
 })->name('reset-password');
 
 
-
 Route::post("login", [AuthController::class, 'login']) ->name('login.post');
 Route::post("register", [AuthController::class, 'register']) ->name('register.post');
 Route::post("forgot-password", [ForgotPasswordController::class, 'sendResetLink']) ->name('forgot-password.post');
 Route::post("reset-password", [ForgotPasswordController::class, 'resetPassword']) ->name('reset-password.post');
 
 
-
 // AUTHENTICATION REQUIRED
 
 Route::middleware('auth')->group(function () {
-
     Route::get('/', [NoteController::class, 'index'])->name('index');
-    Route::get('notes/create', [NoteController::class, 'create'])->name('notes.create');
-    Route::get('notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
-    Route::put('notes/{note}', [NoteController::class, 'update'])->name('notes.update');
-    Route::delete('notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
-    Route::get('notes/{note}', [NoteController::class, 'show'])->name('notes.show');
-    Route::post('notes', [NoteController::class, 'store'])->name('notes.store');
+
+    Route::prefix('notes')->group(function () {
+
+        Route::get('/create', [NoteController::class, 'create'])->name('notes.create');
+        Route::get('/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
+        Route::put('/{note}', [NoteController::class, 'update'])->name('notes.update');
+        Route::delete('/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
+        Route::get('/{note}', [NoteController::class, 'show'])->name('notes.show');
+        Route::post('', [NoteController::class, 'store'])->name('notes.store');
+    });
 
 
-    Route::put("edit-profile", [UserController::class, 'update']) ->name('edit-profile.put');
-    Route::get("edit-profile", [UserController::class, 'editProfile'])->name('edit-profile.get');
+    Route::prefix('edit-profile')->group(function () {
+        Route::put("/", [UserController::class, 'update']) ->name('edit-profile.put');
+        Route::get("/", [UserController::class, 'editProfile'])->name('edit-profile.get');
+    });
 
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
 
 });

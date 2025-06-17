@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Image;
-use Illuminate\Http\Request;
 use App\Models\Note;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\UploadedFile;
@@ -14,7 +13,7 @@ class ImageService
     public function index(Note $note)
     {
         $this->authorize($note);
-        return $note->images()->get();
+        return $note->images()->get(); // duda, paginate?
     }
 
     public function store(Note $note, UploadedFile $image)
