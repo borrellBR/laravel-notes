@@ -20,8 +20,6 @@ class UserController extends Controller
         return view('user.edit-profile', ['user' => auth()->user()]);
     }
 
-
-
     public function update(Request $request, User $user)
     {
         $data = $request->validate(User::updateRules());

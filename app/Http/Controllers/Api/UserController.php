@@ -17,6 +17,15 @@ class UserController extends Controller
       $this->userService = $userService;
     }
 
+    public function getUserId(User $user){
+        $user = $this->userService->getUserId($user);
+
+        return response()->json([
+            'message' => 'User id succesfully obtained',
+            'user'    => $user,
+        ]);
+    }
+
     public function update(Request $request, User $user)
     {
         $data = $request->validate(User::updateRules());
