@@ -1,4 +1,4 @@
-    @include ('layouts.header')
+@include ('layouts.submain-header')
 
     <h1>Edit Note</h1>
     <form method="POST" action="{{ route('notes.update', $note->id) }}" enctype="multipart/form-data">

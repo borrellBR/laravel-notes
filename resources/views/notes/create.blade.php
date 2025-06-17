@@ -1,5 +1,5 @@
 
-@include ('layouts.header')
+@include ('layouts.submain-header')
     <h1>Crear Nota</h1>
 
 

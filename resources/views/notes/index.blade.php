@@ -1,5 +1,5 @@
 
-@include ('layouts.header')
+@include ('layouts.main-header')
     <p>ESPACIO PARA SEARCHBAR</p>
     <h2>Mis notas</h2>
     <a href="{{ route('notes.create') }}">Crear Nota</a>

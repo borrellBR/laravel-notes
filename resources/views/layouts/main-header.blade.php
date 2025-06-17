@@ -7,13 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <a href ="{{ route('index') }}">Inicio</a>
-    <a href ="{{ route('index') }}">Scrible</a>
+    <p>Scrible</p>
 
     <a href="{{ route('edit-profile.get') }}">Editar perfil</a>
-    <a href="{{ route('edit-password.get') }}">Editar contraseña</a>
-
-
 
     <form method="POST" action="{{ route('logout') }}">
         @csrf

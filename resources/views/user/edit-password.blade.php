@@ -1,4 +1,4 @@
-@include ('layouts.header')
+@include ('layouts.edit-password-header')
 <h1>Edit Password</h1>
 <form method="POST" action="{{ route('edit-password.put') }}">
     @csrf
@@ -26,5 +26,3 @@
 @if (session('message'))
     <div>{{ session('message') }}</div>
 @endif
-
-<a href="{{ route('index') }}">Back to Home</a>

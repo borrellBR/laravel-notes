@@ -1,4 +1,4 @@
-    @include ('layouts.header')
+@include ('layouts.edit-user-header')
     <h1>Edit Profile</h1>
     <form method="POST" action="{{ route('edit-profile.put') }}">
         @csrf
@@ -25,5 +25,3 @@
     @if (session('message'))
         <div>{{ session('message') }}</div>
     @endif
-
-    <a href="{{ route('index') }}">Back to Home</a>
