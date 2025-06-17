@@ -26,7 +26,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request, User $user)
+    public function updateProfile(Request $request, User $user)
     {
         $data = $request->validate(User::updateRules());
         $user = auth()->user();
@@ -39,11 +39,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function changePassword(Request $request)
+    public function updatePassword(Request $request)
     {
-        $data =  $request->validate(User::changePasswordRules());
+        $data =  $request->validate(User::updatePasswordRules());
 
-        $this->userService->changePassword(Auth::user(),$data);
+        $this->userService->updatePassword(Auth::user(),$data);
 
         return response()->json([
             'message' => 'Password changed successfully',

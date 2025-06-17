@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+
 @include ('layouts.header')
     <p>ESPACIO PARA SEARCHBAR</p>
     <h2>Mis notas</h2>
@@ -17,8 +9,9 @@
         <a href="{{ route('notes.show', $note->id) }}">{{ $note->header }}</a>
         <p>{{ $note->text }}</p>
 
-        <p><strong>Fijada:</strong> {{ $note->pinned ? 'Sí' : 'No' }}</p>
-
+        <div>
+            <p><strong>Pinned:</strong> {{ $note->pinned ? 'Yes' : 'No' }}</p>
+        </div>
 
         @if ($note->reminder)
             <p><strong>Recordatorio:</strong> {{ $note->reminder ?? '' }}</p>
@@ -44,5 +37,4 @@
     @if (session('status'))
         <div>{{ session('status') }}</div>
     @endif
-</body>
-</html>
+

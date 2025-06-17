@@ -73,7 +73,7 @@ public static function loginRules(): array
         ];
     }
 
-    public static function changePasswordRules(): array
+    public static function updatePasswordRules(): array
     {
         return [
             'current_password' => 'required|string',

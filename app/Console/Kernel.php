@@ -10,7 +10,7 @@ class Kernel extends ConsoleKernel
     // No nos sirve ahora mismo, es para configurar que un comando se ejecute cada cierto tiempo
     protected function schedule(Schedule $schedule)
     {
-     $schedule->command('reminders:send')->dailyAt("06:00");
+     $schedule->command('reminders:send')->dailyAt("09:57");
     }
 
     protected function commands()

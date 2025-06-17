@@ -27,7 +27,6 @@ class ForgotPasswordService
 
     public function resetPassword(string $email, string $token, string $password): void
     {
-
         $ok = DB::table('password_resets')
             ->where('email', $email)
             ->where('token', $token)
@@ -35,17 +34,15 @@ class ForgotPasswordService
 
             if (! $ok) {
                 abort(403,'Token inválido o expirado.');
-
             }
+
             $user = User::where('email', $email)->first();
 
             $this -> checkForDifferentPassword($user, $password);
 
-        $user = User::where('email', $email)->first();
         $user->update(['password' => Hash::make($password)]);
 
         DB::table('password_resets')->where('email', $email)->delete();
-
     }
 
     private function checkForDifferentPassword(User $user, string $newPassword): void
@@ -56,5 +53,3 @@ class ForgotPasswordService
     }
 
 }
-
-//aqui, verificando que la contraseña nueva que pone el usuario no sea igual que la que tiene ahora mismo

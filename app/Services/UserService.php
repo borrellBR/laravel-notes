@@ -13,10 +13,9 @@ class UserService
         $user = auth() -> user();
 
        return $user;
-
     }
 
-    public function update(User $user, array $data): User
+    public function updateProfile(User $user, array $data): User
     {
         $this->requireOwner($user);
 
@@ -30,7 +29,7 @@ class UserService
         // no implementado por ahora
     }
 
-    public function changePassword(User $user, array $data): void
+    public function updatePassword(User $user, array $data): void
     {
 
         $this -> checkCurrentPassword($user, $data);
@@ -57,7 +56,7 @@ class UserService
 
     private function checkForDifferentPassword(User $user, array $data){
         if ($data['current_password'] === $data['new_password']) {
-            abort(403,'La nueva contraseña no peude se la misma que la actual');
+            abort(403,'La nueva contraseña no puede se la misma que la actual');
         }
     }
 }

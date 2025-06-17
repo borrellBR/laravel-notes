@@ -20,7 +20,7 @@ class UserController extends Controller
         return view('user.edit-profile', ['user' => auth()->user()]);
     }
 
-    public function update(Request $request, User $user)
+    public function updateProfile(Request $request, User $user)
     {
         $data = $request->validate(User::updateRules());
         $user = auth()->user();
@@ -32,10 +32,15 @@ class UserController extends Controller
                          ->with('message', 'Perfil actualizado correctamente');
     }
 
-    public function changePassword(Request $request){
-        $data =  $request->validate(User::changePasswordRules());
+    public function editPassword()
+    {
+        return view('user.edit-password', ['user' => auth()->user()]);
+    }
 
-        $this->userService->changePassword(Auth::user(),$data);
+    public function updatePassword(Request $request){
+        $data =  $request->validate(User::updatePasswordRules());
+
+        $this->userService->updatePassword(Auth::user(),$data);
 
         return back()->with('message', 'Contraseña cambiada correctamente');
     }

@@ -50,10 +50,15 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('edit-profile')->group(function () {
-        Route::put("/", [UserController::class, 'update']) ->name('edit-profile.put');
+        Route::put("/", [UserController::class, 'updateProfile']) ->name('edit-profile.put');
         Route::get("/", [UserController::class, 'editProfile'])->name('edit-profile.get');
+
     });
 
+    Route::prefix('edit-password')->group(function () {
+        Route::get("/", [UserController::class, 'editPassword'])->name('edit-password.get');
+        Route::put("/", [UserController::class, 'updatePassword']) ->name('edit-password.put');
+    });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

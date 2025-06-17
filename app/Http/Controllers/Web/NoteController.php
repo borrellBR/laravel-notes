@@ -35,9 +35,9 @@ class NoteController extends Controller
     return view('notes.create');
 }
 
-  public function show($id)
+  public function show(Note $note)
   {
-    $note = $this->noteService->show($id);
+    $note = $this->noteService->show($note);
     return view('notes.show', compact('note'));
 }
 

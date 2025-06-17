@@ -11,6 +11,8 @@
     <a href ="{{ route('index') }}">Scrible</a>
 
     <a href="{{ route('edit-profile.get') }}">Editar perfil</a>
+    <a href="{{ route('edit-password.get') }}">Editar contraseña</a>
+
 
 
     <form method="POST" action="{{ route('logout') }}">
