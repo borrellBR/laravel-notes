@@ -30,23 +30,6 @@ class NoteController extends Controller
                         ->with('message', 'Nota creada correctamente');
   }
 
-  public function searchNoteName(Request $request){
-    $search = $request -> input('search');
-    $notes = Note::where('header','like', "%$search%")->where('user_id', auth()->id())-> get();
-
-    return view('notes.index', ['notes' => $notes]);
-
-  }
-
-  public function searchNoteDate(Request $request){
-    $search = $request -> input('search');
-
-    $notes = Note::whereDate('reminder','like',"%$search%")->get();
-
-    return view('notes.index', ['notes' => $notes]);
-
-  }
-
   public function create()
   {
     return view('notes.create');
@@ -81,14 +64,26 @@ class NoteController extends Controller
                      ->with('message', 'Nota eliminada correctamente');
 }
 
-  public function pin(Note $note)
-  {
- //implementar
+public function searchNoteName(Request $request){
+    $search = $request -> input('search');
+    $notes = Note::where('header','like', "%$search%")->where('user_id', auth()->id())-> get();
+
+    return view('notes.index', ['notes' => $notes]);
   }
 
-  public function unpin(Note $note)
-  {
- //implementar
+  public function searchNoteDate(Request $request){
+    $search = $request -> input('search');
+
+    $notes = Note::whereDate('reminder','like',"%$search%")->get();
+
+    return view('notes.index', ['notes' => $notes]);
+  }
+
+  public function togglePin(Note $note) {
+    $note ->pinned =! $note->pinned;
+    $note ->save();
+
+    return response()->json(['pinned' => $note -> pinned]);
   }
 
 }

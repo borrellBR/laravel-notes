@@ -19,7 +19,7 @@ class NoteController extends Controller
   public function index()
   {
     return response()->json(['notes' => $this->noteService->index()]);
-}
+    }
 
   public function store(Request $request)
   {
@@ -29,24 +29,47 @@ class NoteController extends Controller
     return response()->json(['note' => $note], 201);
   }
 
+
   public function show(Note $note)
   {
-    return response()->json(['note' => $this->noteService->show($note)]);
+      return response()->json(['note' => $this->noteService->show($note)]);
+    }
+
+    public function update(Request $request, Note $note)
+    {
+        $data = $request->validate(Note::validateNote());
+        $image = $request->file('image');
+
+        $updated = $this->noteService->update($data, $note, $image);
+        return response()->json(['note' => $updated]);
+
+    }
+
+    public function destroy(Note $note)
+    {
+        $this->noteService->destroy($note);
+        return response()->json(['message' => 'Note deleted successfully']);
+    }
+
+    public function searchNoteName(Request $request){
+      $search = $request -> input('search');
+      $notes = Note::where('header','like', "%$search%")->where('user_id', auth()->id())-> get();
+
+      return response()->json(['notes' => $notes]);
+    }
+
+    public function searchNoteDate(Request $request){
+      $search = $request -> input('search');
+
+      $notes = Note::whereDate('reminder','like',"%$search%")->get();
+
+      return response()->json(['notes' => $notes]);
+    }
+
+    public function togglePin(Note $note) {
+        $note ->pinned =! $note->pinned;
+        $note ->save();
+
+        return response()->json(['pinned' => $note -> pinned]);
   }
-
-  public function update(Request $request, Note $note)
-  {
-    $data = $request->validate(Note::validateNote());
-    $image = $request->file('image');
-
-    $updated = $this->noteService->update($data, $note, $image);
-    return response()->json(['note' => $updated]);
-
-  }
-
-  public function destroy(Note $note)
-  {
-    $this->noteService->destroy($note);
-    return response()->json(['message' => 'Note deleted successfully']);
-}
 }

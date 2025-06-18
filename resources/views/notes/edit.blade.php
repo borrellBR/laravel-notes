@@ -19,7 +19,7 @@
         </div>
         <div>
             <label for="reminder">Reminder:</label>
-            <input type="datetime-local" id="reminder" name="reminder" value="{{ old('reminder', $note->reminder ?? '') }}">
+            <input type="date" id="reminder" name="reminder" value="{{ old('reminder', $note->reminder ?? '') }}">
         </div>
         <br>
         <label for="image">Imagen</label>

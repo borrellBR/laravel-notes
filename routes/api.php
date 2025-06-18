@@ -23,6 +23,8 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/{note}', [NoteController::class, 'show']);
         Route::put('/{note}', [NoteController::class, 'update']);
         Route::delete('/{note}', [NoteController::class, 'destroy']);
+        Route::put('/{note}/toggle-pin', [NoteController::class, 'togglePin']);
+
     });
 
     Route::prefix('notes/{note}/images')->group(function () {
@@ -33,6 +35,10 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/user', [UserController::class,'getUserId']);
     Route::put('/users/{user}', [UserController::class, 'update']);
+
+
+    Route::get("/search", [NoteController::class, 'searchNoteName']);
+    Route::get("/search-date", [NoteController::class, 'searchNoteDate']);
 
     Route::post('/update-password', [UserController::class, 'updatePassword']);
     Route::post('/logout', [AuthController::class, 'logout']);

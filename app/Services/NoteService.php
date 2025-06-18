@@ -32,17 +32,10 @@ class NoteService
      return $note;
     }
 
-    // public function search($search){
-
-
-    //     return $results;
-    // }
-
-  public function show(Note $note): Note
-  {
+    public function show(Note $note): Note {
       $this->requireOwner($note->user_id);
       return $note->load('images');
-  }
+    }
 
 
   public function update(array $data, $note, ?UploadedFile $image = null)

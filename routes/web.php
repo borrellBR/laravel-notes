@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
         Route::get('/{note}', [NoteController::class, 'show'])->name('notes.show');
         Route::post('', [NoteController::class, 'store'])->name('notes.store');
+        Route::put('/{note}/toggle-pin', [NoteController::class, 'togglePin']);
+
     });
 
 
@@ -62,6 +64,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get("/search", [NoteController::class, 'searchNoteName'])->name('notes.search');
     Route::get("/search-date", [NoteController::class, 'searchNoteDate'])->name('notes.search-date');
+
 
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

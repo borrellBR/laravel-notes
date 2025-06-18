@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('header', 50);
             $table->text('text');
             $table->boolean('pinned')->default(false);
-            $table->dateTime('reminder')->nullable();
+            $table->date('reminder')->nullable();
             $table->timestamps();
 
             $table -> foreignId('user_id') -> constrained()->onUpdate('cascade')->onDelete('cascade');

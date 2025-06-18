@@ -7,9 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+    <nav style="display: flex; align-items: center; gap: 1rem;">
+
     <a href ="{{ route('index') }}">Inicio</a>
 
     <a href="{{ route('edit-password.get') }}">Editar contraseña</a>
-
+    </nav>
 </body>
 </html>

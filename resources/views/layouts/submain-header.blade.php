@@ -7,7 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <a href ="{{ route('index') }}">Inicio</a>
+    <nav style="display: flex; align-items: center; gap: 1rem;">
 
+    <a href ="{{ route('index') }}">Inicio</a>
+    </nav>
 </body>
 </html>

@@ -7,9 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <a href ="{{ route('index') }}">Inicio</a>
 
-    <a href="{{ route('edit-profile.get') }}">Editar perfil</a>
+    <nav style="display: flex; align-items: center; gap: 1rem;">
+        <a href ="{{ route('index') }}">Inicio</a>
+        <a href="{{ route('edit-profile.get') }}">Editar perfil</a>
+    </nav>
 
 </body>
 </html>
