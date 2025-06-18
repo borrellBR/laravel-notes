@@ -30,11 +30,18 @@ class NoteController extends Controller
                         ->with('message', 'Nota creada correctamente');
   }
 
-  public function search(Request $request){
+  public function searchNoteName(Request $request){
     $search = $request -> input('search');
     $notes = Note::where('header','like', "%$search%")->where('user_id', auth()->id())-> get();
 
+    return view('notes.index', ['notes' => $notes]);
 
+  }
+
+  public function searchNoteDate(Request $request){
+    $search = $request -> input('search');
+
+    $notes = Note::whereDate('reminder','like',"%$search%")->get();
 
     return view('notes.index', ['notes' => $notes]);
 

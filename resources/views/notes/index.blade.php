@@ -7,6 +7,11 @@
         <button type = "submit">Search </button>
     </form>
 
+    <form action ="{{route('notes.search-date')}}" method ="GET">
+        <input type = "date" name = "search" placeholder = "Search Notes by Date">
+        <button type = "submit">Search </button>
+    </form>
+
    <h2>Mis notas</h2>
     <a href="{{ route('notes.create') }}">Crear Nota</a>
     <ul>
