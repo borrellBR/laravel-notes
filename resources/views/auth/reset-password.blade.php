@@ -7,7 +7,7 @@
     <title>Restablecer contraseña</title>
 </head>
 <body>
-    @include ('layouts.header')
+    @include ('layouts.main-header')
 
     <h1>Restablecer contraseña</h1>
     <form method="POST" action="{{ route('reset-password.post') }}">

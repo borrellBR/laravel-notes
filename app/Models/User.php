@@ -35,6 +35,7 @@ public static function registerRules(): array
         'lastname' => 'required|string|max:255',
         'email'    => 'required|string|email|unique:users',
         'password' => 'required|string|min:6',
+        'terms'    => 'accepted'
     ];
 }
 

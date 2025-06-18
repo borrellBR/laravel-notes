@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
         Route::put("/", [UserController::class, 'updatePassword']) ->name('edit-password.put');
     });
 
+    Route::get("/search", [NoteController::class, 'search'])->name('notes.search');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });

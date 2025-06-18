@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    @include ('layouts.header')
+    @include ('layouts.main-header')
 
     <h1>Login</h1>
     <form method="POST" action="{{ route('login') }}">

@@ -1,7 +1,13 @@
 
 @include ('layouts.main-header')
-    <p>ESPACIO PARA SEARCHBAR</p>
-    <h2>Mis notas</h2>
+<br>
+
+    <form action ="{{route('notes.search')}}" method ="GET">
+        <input type = "text" name = "search" placeholder = "Search Notes">
+        <button type = "submit">Search </button>
+    </form>
+
+   <h2>Mis notas</h2>
     <a href="{{ route('notes.create') }}">Crear Nota</a>
     <ul>
         @foreach ($notes as $note)
@@ -10,7 +16,7 @@
         <p>{{ $note->text }}</p>
 
         <div>
-            <p><strong>Pinned:</strong> {{ $note->pinned ? 'Yes' : 'No' }}</p>
+            <p><strong>Pinned:</strong> {{ $note->pinned ? 'Si' : 'No' }}</p>
         </div>
 
         @if ($note->reminder)

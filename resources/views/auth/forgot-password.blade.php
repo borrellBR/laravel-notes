@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    @include ('layouts.header')
+    @include ('layouts.main-header')
 
 
     <h1>Ayudanos a Recuperar tu Contraseña</h1>

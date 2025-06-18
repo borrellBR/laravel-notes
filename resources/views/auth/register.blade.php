@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    @include ('layouts.header')
+    @include ('layouts.main-header')
 
 
     <h1>Register</h1>
@@ -31,6 +31,11 @@
         <div>
             <label for="name">Last Name:</label>
             <input type="text" id="lastname" name="lastname" required autofocus>
+        </div>
+
+        <div>
+            <label for="name">Para registrarte, debes aceptar los terminos y condiciones:</label>
+            <input type="checkbox" id="terms" name ='terms' required>
         </div>
 
         <br>

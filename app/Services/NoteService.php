@@ -32,6 +32,12 @@ class NoteService
      return $note;
     }
 
+    // public function search($search){
+
+
+    //     return $results;
+    // }
+
   public function show(Note $note): Note
   {
       $this->requireOwner($note->user_id);
