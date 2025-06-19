@@ -14,7 +14,7 @@
             <div class="form-group" style="width: 80%;">
                 <input type="date" name="search" class="form-control" placeholder="Search Notes by Date" style="width: 100%;">
             </div>
-            <button type="submit" class="btn btn-primary ml-2">Search</button>
+            {{-- <button type="submit" class="btn btn-primary ml-2">Search</button> --}}
         </form>
 
     </div>
@@ -35,7 +35,7 @@
                         <p>{{ $note->text }}</p>
                         <div>
                             @foreach ($note->images as $image)
-                            <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota" style="width: 100%; height: 150px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota" style="width: 100%; height: 150px; object-fit: cover;">
                             @endforeach
 
                                 <div style="display: flex; align-items: center; justify-content: flex-end;">
