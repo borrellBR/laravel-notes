@@ -12,11 +12,7 @@
             <label for="text">Text:</label>
             <textarea id="text" name="text" required>{{ old('text', $note->text) }}</textarea>
         </div>
-        <div>
-            <label for="pinned">Pinned:</label>
-            <input type="hidden" name="pinned" value="0">
-            <input type="checkbox" id="pinned" name="pinned" value="1" {{ $note->pinned ? 'checked' : '' }}>
-        </div>
+
         <div>
             <label for="reminder">Reminder:</label>
             <input type="date" id="reminder" name="reminder" value="{{ old('reminder', $note->reminder ?? '') }}">

@@ -14,9 +14,6 @@
     <textarea name="text" id="text" required></textarea>
     <br>
 
-    <input type="hidden" name="pinned" value="0">
-    <label for="pinned">Fijar</label>
-    <input type="checkbox" name="pinned" id="pinned" value="1">
     <br>
 
     <label for="reminder">Recordatorio</label>
