@@ -16,16 +16,16 @@
 
 
     <nav style="display: flex; justify-content: space-between; align-items: center;">
-        <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:19rem">
-            <img src="Scribl.png" alt="Scribl Logo" style="max-width:15rem">
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:22rem">
+            <img src="Scribl.png" alt="Scribl Logo" style="max-width:20rem">
         </div>
 
-        <a href="{{ route('edit-profile.get') }}" class="btn btn-dark fw-bold" style="color:black; height: 3rem; border-radius: 5px;">
+        <a href="{{ route('edit-profile.get') }}" class="btn btn-dark fw-bold" style="color:black; height: 3rem; border-radius: 8px;">
             <i class="fi fi-sr-pencil"></i> Editar perfil
         </a>
         <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
             @csrf
-            <button type="submit" class="btn btn-dark fw-bold" style="color:black; height: 3rem; border-radius: 5px;">
+            <button type="submit" class="btn btn-dark fw-bold" style="margin-right: 6rem; color:black; background-color:white; height: 3rem; border-radius: 8px;">
                 <i class="fi fi-bs-sign-out-alt"></i> Salir
             </button>
         </form>
