@@ -16,8 +16,11 @@
 
 
     <nav style="display: flex; justify-content: space-between; align-items: center;">
+
         <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:22rem">
-            <img src="Scribl.png" alt="Scribl Logo" style="max-width:20rem">
+            <a href ="{{ route('index') }}">
+                <img src="Scribl.png" alt="Scribl Logo" style="max-width:20rem">
+            </a>
         </div>
 
         <a href="{{ route('edit-profile.get') }}" class="btn btn-dark fw-bold" style="color:black; height: 3rem; border-radius: 8px;">
