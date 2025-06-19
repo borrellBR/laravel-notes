@@ -21,7 +21,8 @@
 
     <div class="display-inline" style="display: flex; justify-content: space-between; align-items: center;">
         <h3 class="col-md-4">Mis notas</h3>
-        <a class="col-md-4 col-md-offset-9" href="{{ route('notes.create') }}">Crear Nota</a>
+        <a style= "color:black; margin-right:4rem; border-radius:5px" class="col-md-2 col-md-offset-9" href="{{ route('notes.create') }}">
+            <i class="fi fi-br-plus"></i> Añadir</a>
     </div>
 
     <hr style="border: 1px solid #cbc9c9; margin: 20px 0;">

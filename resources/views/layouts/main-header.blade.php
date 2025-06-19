@@ -15,20 +15,23 @@
 <body>
 
 
-<nav style="display: flex; justify-content: flex-end; align-items: center; gap: 1rem; padding: 10px;">
-    <a href="{{ route('edit-profile.get') }}">Editar perfil</a>
+    <nav style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:19rem">
+            <img src="Scribl.png" alt="Scribl Logo" style="max-width:15rem">
+        </div>
 
-    <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
-        @csrf
-        <button type="submit" style="background: none; border: none; padding: 0; color: blue; cursor: pointer;">
-            Cerrar sesión
-        </button>
-    </form>
-</nav>
+        <a href="{{ route('edit-profile.get') }}" class="btn btn-dark fw-bold" style="color:black; height: 3rem; border-radius: 5px;">
+            <i class="fi fi-sr-pencil"></i> Editar perfil
+        </a>
+        <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+            @csrf
+            <button type="submit" class="btn btn-dark fw-bold" style="color:black; height: 3rem; border-radius: 5px;">
+                <i class="fi fi-bs-sign-out-alt"></i> Salir
+            </button>
+        </form>
+    </nav>
 
-<div style="text-align: center; margin-top: 10px;">
-    <img src="Scribl.png" alt="Scribl Logo" style="max-width:15rem">
-</div>
+
 
 </body>
 </html>

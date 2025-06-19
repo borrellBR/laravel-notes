@@ -11,9 +11,12 @@
 <body>
     <nav style="display: flex; align-items: center; gap: 1rem;">
 
-    <a href ="{{ route('index') }}">Inicio</a>
+    <a href ="{{ route('index') }}">
+        <img src="Scribl.png" alt="Scribl Logo" style="max-width:5rem">
+    </a>
 
     <a href="{{ route('edit-password.get') }}">Editar contraseña</a>
     </nav>
 </body>
 </html>
+
