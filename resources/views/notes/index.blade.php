@@ -5,16 +5,15 @@
 
         <form action="{{ route('notes.search') }}" method="GET" class="form-inline" style="flex: 1; display: flex; justify-content: center; align-items: center;">
             <div class="form-group;" style="width: 80%;">
-
                   <input type="text" name="search" class="form-control" placeholder=" 🔎 Buscar..." style="width: 100%;">
             </div>
         </form>
 
         <form action="{{ route('notes.search-date') }}" method="GET" class="form-inline" style="flex: 1; display: flex; justify-content: center; align-items: center;">
-            <div class="form-group" style="width: 80%;">
+            <div class="form-group" style="display:flex; width: 80%;">
                 <input type="date" name="search" class="form-control" placeholder="Buscar por fecha" style="width: 100%;">
+                <button type="submit" style="color:white; background-color:black; border-color:black; display: none;" class="btn btn-primary ml-2">Search</button>
             </div>
-            <button type="submit" style= "color:white; background-color:black; border-color:black; "class="btn btn-primary ml-2">Search</button>
         </form>
 
     </div>
