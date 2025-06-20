@@ -31,7 +31,7 @@ class UserController extends Controller
         $data = $request->validate(User::updateRules());
         $user = auth()->user();
 
-        $updated = $this->userService->update($user, $data);
+        $updated = $this->userService->updateProfile($user, $data);
 
         return response()->json([
             'message' => 'User updated successfully',

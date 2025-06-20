@@ -1,39 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
+ @include ('layouts.login-header')
 
-    <title>Document</title>
-</head>
-<body>
-    @include ('layouts.main-header')
 
-    <h1>Login</h1>
-    <form method="POST" action="{{ route('login') }}">
+    <form style="text-align:left; margin-left:110rem;  margin-right:10rem; margin-top:5rem; " method="POST" action="{{ route('login') }}">
         @csrf
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required autofocus>
+
+        <div class="form-group">
+            <label for="email">Email*</label>
+            <input style="padding:2rem;" type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required>
         </div>
 
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <div class="form-group">
+            <label for="password">Password*</label>
+            <input style="padding:2rem;" type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required>
+                <small id="passwordHelp" class="form-text text-muted">
+                        Has olvidado tu contrasenya?
+                    <strong> <a style="text-decoration:none; color:rgb(67, 67, 67); "href="{{ route('forgot-password') }}">
+                        Recuperar</a>
+                    </strong>
+                </small>
         </div>
-        <br>
-        <button type="submit">Login</button>
+
+        <div style="text-align:center; "class="submit">
+
+            <button style= "padding-left:6.35rem; padding-right:6.35rem; margin-top:30rem; color:white; background-color:black;"type="submit" class="btn btn-primary">
+               Iniciar Sesion
+            </button>
+            <br>
+             <a style= "margin-top:1rem; padding-left:8rem; padding-right:8rem; border-color:black; color:rgb(0, 0, 0); background-color:rgb(255, 255, 255);" class="btn btn-primary"href={{ route('register') }}>Register</a>
+            </div>
+        </div>
     </form>
-    <br>
+
+
+
     @if (session('status'))
         <div>{{ session('status') }}</div>
     @endif
 
-    <a href="{{ route('register') }}">Register</a>
-
-    <br>
-    <a href="{{ route('forgot-password') }}">Has olvidado tu contraseña?</a>
-</body>
-</html>

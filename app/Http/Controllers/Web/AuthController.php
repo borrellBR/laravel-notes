@@ -41,6 +41,7 @@ class AuthController extends Controller
         if ($response['status'] !== 200) {
             return back()->with('status', $response['message'] ?? 'Error');
         }
+
         return redirect()
             ->route('index')
             ->with('token', $response['access_token']);

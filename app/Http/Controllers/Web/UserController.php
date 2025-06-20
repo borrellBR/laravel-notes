@@ -24,10 +24,10 @@ class UserController extends Controller
     {
         $data = $request->validate(User::updateRules());
         $user = auth()->user();
-        $this->userService->update($user, $data);
+        $this->userService->updateProfile($user, $data);
 
 
-        $this->userService->update($user, $data);
+        $this->userService->updateProfile($user, $data);
         return redirect()->route('index')
                          ->with('message', 'Perfil actualizado correctamente');
     }

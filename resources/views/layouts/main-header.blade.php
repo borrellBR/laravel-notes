@@ -17,7 +17,7 @@
 
     <nav style="display: flex; justify-content: space-between; align-items: center;">
 
-        <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:22rem">
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:25rem">
             <a href ="{{ route('index') }}">
                 <img src="Scribl.png" alt="Scribl Logo" style="max-width:20rem">
             </a>
