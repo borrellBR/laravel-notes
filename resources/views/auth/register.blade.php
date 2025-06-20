@@ -1,41 +1,48 @@
 @include ('layouts.login-header')
 
 
-    <h1>Register</h1>
-    <form method="POST" action="{{ route('register') }}">
+    <form style="text-align:left; margin-left:110rem;  margin-right:10rem; margin-bottom:-5rem; " method="POST" action="{{ route('register') }}">
         @csrf
-        <div>
+        <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input style="padding:2rem;" type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <input style="padding:2rem;" type="password" id="password" name="password" class="form-control" placeholder="Enter Password" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required autofocus>
+            <input style="padding:2rem;" type="text" id="name" name="name" class="form-control" placeholder="Enter Name" required autofocus>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="name">Last Name:</label>
-            <input type="text" id="lastname" name="lastname" required autofocus>
+            <input style="padding:2rem;" type="text" id="lastname" name="lastname" class="form-control" placeholder="Enter Lastname" required autofocus>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="name">Para registrarte, debes aceptar los terminos y condiciones:</label>
-            <input type="checkbox" id="terms" name ='terms' required>
+            <input style="padding:2rem;"type="checkbox" id="terms" name ='terms' required>
         </div>
 
         <br>
 
-        <button type="submit">Register</button>
-    </form>
+        <div style="text-align:center; "class="submit">
 
-    @if (session('status'))
+            <button style= "padding-left:6.35rem; padding-right:6.35rem; margin-top:10rem; border-color:black; color:rgb(0, 0, 0); background-color:rgb(255, 255, 255);"type="submit" class="btn btn-primary">
+               Crear Cuenta
+            </button>
+            <br>
+             <a style= "margin-top:1rem; padding-left:8rem; padding-right:8rem; color:rgb(255, 255, 255); background-color:rgb(0, 0, 0);" class="btn btn-primary"href={{ route('login') }}>Volver al login</a>
+            </div>
+        </div>
+        @if (session('status'))
         <div>{{ session('status') }}</div>
     @endif
+     </form>
 
-    <a href="{{ route('login') }}">Login</a>
+
+

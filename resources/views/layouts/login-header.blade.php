@@ -17,17 +17,14 @@
     <nav style="margin-top:2rem; border-radius:8px; display: flex; justify-content: space-between; align-items: center;">
 
         <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-            <a href ="{{ route('index') }}">
-                <img src="Scribl.png" alt="Scribl Logo" style="margin-left:110rem;max-width:20rem">
-            </a>
+                <img src="Scribl.png" alt="Scribl Logo" style="margin-left:100rem;max-width:55rem">
         </div>
 
-        @if(Request::is('edit-password'))
-
-        @else
-
-        @endif
     </nav>
+
+    {{-- <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+        <img src="Smile.png" alt="Scribl Logo" style="margin-left:100rem;max-width:55rem">
+        </div> --}}
 
 
 
