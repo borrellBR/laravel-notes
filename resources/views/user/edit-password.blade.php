@@ -1,7 +1,7 @@
 @include ('layouts.edit-data-header')
-    <div class="display-inline" style="display: flex;padding-bottom: -4rem; margin-bottom:-2rem;  justify-content: space-between; align-items: center;">
-        <h3 class="col-md-4">Mis notas</h3>
-    </div>
+<div class="display-inline" style="display: flex;padding-bottom: -4rem; margin-bottom:-2rem;  justify-content: space-between; align-items: center;">
+    <h3 class="col-md-4">Mis Notas</h3>
+</div>
 
     <hr style="border: 1px solid #cbc9c9; margin: 20px 0;">
 
@@ -34,5 +34,3 @@
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
-
-

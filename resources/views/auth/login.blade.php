@@ -1,7 +1,8 @@
  @include ('layouts.login-header')
 
 
-    <form style="text-align:left; margin-left:110rem;  margin-right:10rem; margin-bottom:-5rem; " method="POST" action="{{ route('login') }}">
+
+    <form style=" text-align:left; margin-left:110rem;  margin-right:10rem; margin-bottom:-5rem; " method="POST" action="{{ route('login') }}">
         @csrf
 
         <div class="form-group">
@@ -20,7 +21,7 @@
                 </small>
         </div>
 
-        <div style="text-align:center; "class="submit">
+        <div style="margin-top: 14rem; text-align:center; "class="submit">
 
             <button style= "padding-left:6.35rem; padding-right:6.35rem; margin-top:10rem; color:white; background-color:black;"type="submit" class="btn btn-primary">
                Iniciar Sesion

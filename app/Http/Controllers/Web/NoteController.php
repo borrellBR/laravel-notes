@@ -21,6 +21,7 @@ class NoteController extends Controller
       return view('notes.index', compact('notes'));
   }
 
+
   public function store(Request $request)
   {
     $data = $request -> validate(Note::validateNote());
@@ -32,19 +33,20 @@ class NoteController extends Controller
 
   public function create()
   {
-    return view('notes.create');
+    return view('notes.form', ['mode' => 'create']);
 }
 
   public function show(Note $note)
   {
     $note = $this->noteService->show($note);
-    return view('notes.show', compact('note'));
-}
+    // return view('notes.show', compact('note'));
+    return view('notes.form', ['mode' => 'edit',  'note' => $note]);
+  }
 
   public function edit (Note $note)
   {
-    return view('notes.edit', compact('note'));
-}
+    return view('notes.form', ['mode' => 'edit',  'note' => $note]);
+    }
 
   public function update(Request $request, Note $note)
   {

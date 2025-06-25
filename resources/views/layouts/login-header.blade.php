@@ -12,9 +12,26 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        .contenedor-imagen {
+            width: 50%;
+            background-color: black;
+            height: 100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
 
 
-    <nav style="margin-top:2rem; border-radius:8px; display: flex; justify-content: space-between; align-items: center;">
+    </style>
+
+
+     <div class="contenedor-imagen">
+        <i style="font-size:30rem;color:white;" class="fi fi-rr-smile"></i>
+        </div>
+
+
+    <nav style="margin-top:-95rem; border-radius:8px; display: flex; justify-content: space-between; align-items: center;">
 
         <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
                 <img src="Scribl.png" alt="Scribl Logo" style="margin-left:100rem;max-width:55rem">

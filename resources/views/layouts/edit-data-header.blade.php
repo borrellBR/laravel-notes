@@ -14,16 +14,21 @@
 <body>
 
 
-    <nav style="margin-top:2rem; border-radius:8px; display: flex; justify-content: space-between; align-items: center;">
+    <nav style="margin-top:2rem; border-radius:8px; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem;">
+        <div style="display: flex; justify-content: flex-start; align-items: center;">
+            <a href="{{ route('index') }}" style=" color: black; font-weight: bold;">
+                <i class="fi fi-rr-house-chimney" style="font-size: 2rem; background-color:rgb(255, 255, 255); color:rgb(0, 0, 0); border-radius:4px; padding:3px;"></i>
+            </a>
+        </div>
 
-        <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:32rem">
-            <a href ="{{ route('index') }}">
-                <img src="Scribl2.png" alt="Scribl Logo" style="max-width:20rem">
+        <div style="flex: 1; margin-left:29rem;display: flex; justify-content: center; align-items: center;">
+            <a href="{{ route('index') }}">
+                <img src="Scribl2.png" alt="Scribl Logo" style="max-width: 20rem;">
             </a>
         </div>
 
         @if(Request::is('edit-password'))
-                    <div class="top-right" style= "border-radius:8px; margin-right:3rem; align-items:center; display:flex; background-color:rgb(234, 234, 234)">
+                    <div class="top-right" style= "border-radius:8px; margin-left:2rem; align-items:center; display:flex; background-color:rgb(234, 234, 234)">
                         <a href="{{ route('edit-profile.get') }}" class="btn btn-dark fw-bold" style="border-radius:8px; color:grey; text-decoration:none; padding-left:1rem; padding:rem; display: flex; align-items: center; justify-content: center; height: 3rem;">
                             <i class="fi fi-sr-pencil" style="margin-right: 0.5rem;"></i> Editar Perfil
                         </a>

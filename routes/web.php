@@ -26,6 +26,9 @@ Route::get("reset-password/{token}", function ($token) {
     return view('auth.reset-password', ['token' => $token]);
 })->name('reset-password');
 
+Route::get("terms/", function () {
+    return view('terms.terms');
+})->name('terms');
 
 Route::post("login", [AuthController::class, 'login']) ->name('login.post');
 Route::post("register", [AuthController::class, 'register']) ->name('register.post');
@@ -40,11 +43,11 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('notes')->group(function () {
 
-        Route::get('/create', [NoteController::class, 'create'])->name('notes.create');
-        Route::get('/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
-        Route::put('/{note}', [NoteController::class, 'update'])->name('notes.update');
+        Route::get('/create', [NoteController::class, 'create'])->name('notes.create'); //1
+        Route::get('/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');//2
+        Route::put('/{note}', [NoteController::class, 'update'])->name('notes.update');//2.1
         Route::delete('/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
-        Route::get('/{note}', [NoteController::class, 'show'])->name('notes.show');
+        Route::get('/{note}', [NoteController::class, 'show'])->name('notes.show');//3
         Route::post('', [NoteController::class, 'store'])->name('notes.store');
         Route::put('/{note}/toggle-pin', [NoteController::class, 'togglePin']);
 

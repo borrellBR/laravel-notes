@@ -20,8 +20,8 @@
 
     <div class="display-inline" style="display: flex;padding-bottom: -4rem; margin-bottom:-2rem;  justify-content: space-between; align-items: center;">
         <h3 class="col-md-4">Mis notas</h3>
-        <a style= "color:rgb(255, 255, 255);margin-bottom:-2rem; padding-top: 0.6rem; width:15rem;  height:3rem; background-color:black; margin-right:4rem; border-radius:8px" class="col-md-2 col-md-offset-9" href="{{ route('notes.create') }}">
-            <i class="fi fi-br-plus"></i> Añadir
+        <a style= "color:rgb(255, 255, 255);margin-bottom:-2rem; display:flex; padding-top: 0.6rem; width:15rem;  height:3rem; background-color:black; margin-right:4rem; border-radius:8px" class="col-md-2 col-md-offset-9" href="{{ route('notes.create') }}">
+            <i style= "margin-right:0.6rem" class="fi fi-br-plus"></i>Añadir
         </a>
     </div>
 
@@ -51,7 +51,7 @@
                                             {{ $note->text }}
                                         </p>
                                     @else
-                                        @foreach ($note->images as $image)
+                                        @foreach ($note->images->take(1) as $image)
                                             <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota" style="padding-left:1rem; padding-right:1rem; border-radius:20px; width: 100%; height: 250px; object-fit: cover;">
                                         @endforeach
                                     @endif

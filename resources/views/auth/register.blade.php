@@ -1,6 +1,5 @@
 @include ('layouts.login-header')
 
-
     <form style="text-align:left; margin-left:110rem;  margin-right:10rem; margin-bottom:-5rem; " method="POST" action="{{ route('register') }}">
         @csrf
         <div class="form-group">
@@ -24,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            <label for="name">Para registrarte, debes aceptar los terminos y condiciones:</label>
+            <label for="name">Para registrarte, debes aceptar los  <a href="terms"</a>terminos y condiciones:</label>
             <input style="padding:2rem;"type="checkbox" id="terms" name ='terms' required>
         </div>
 
@@ -32,13 +31,16 @@
 
         <div style="text-align:center; "class="submit">
 
-            <button style= "padding-left:6.35rem; padding-right:6.35rem; margin-top:10rem; border-color:black; color:rgb(0, 0, 0); background-color:rgb(255, 255, 255);"type="submit" class="btn btn-primary">
-               Crear Cuenta
+            <button style= "padding-left:6.35rem; padding-right:6.35rem; margin-top:2rem; color:white; background-color:black;"type="submit" class="btn btn-primary">
+                Crear Cuenta
             </button>
             <br>
-             <a style= "margin-top:1rem; padding-left:8rem; padding-right:8rem; color:rgb(255, 255, 255); background-color:rgb(0, 0, 0);" class="btn btn-primary"href={{ route('login') }}>Volver al login</a>
+                <a style= "margin-top:1rem; padding-left:8.8rem; padding-right:8.8rem; border-color:black; color:rgb(0, 0, 0); background-color:rgb(255, 255, 255);" class="btn btn-primary"href={{ route('login') }}>
+                    Login
+                </a>
             </div>
         </div>
+
         @if (session('status'))
         <div>{{ session('status') }}</div>
     @endif
