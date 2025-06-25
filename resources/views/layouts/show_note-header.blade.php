@@ -19,7 +19,7 @@
 </head>
 <body>
 
-    <nav style="margin-top:2rem; border-radius:8px; display: flex; justify-content: space-between; align-items: center;">
+    {{-- <nav style="margin-top:2rem; border-radius:8px; display: flex; justify-content: space-between; align-items: center;">
 
         <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:">
             <a href ="{{ route('index') }}">
@@ -27,7 +27,7 @@
             </a>
 
         </div>
-    </nav>
+    </nav> --}}
 
 </body>
 </html>
