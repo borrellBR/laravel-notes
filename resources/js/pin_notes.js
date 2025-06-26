@@ -15,6 +15,8 @@ document.querySelectorAll('.pin-btn').forEach(btn =>{
             btn.innerHTML = data.pinned
             ? '<i class="fi fi-rr-thumbtack"></i>'
             : '  <i class="fi fi-sr-thumbtack"></i>';
+            window.location.reload();
+
     } else {
         alert('Error al cambiar estado');
     }

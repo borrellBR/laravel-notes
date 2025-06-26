@@ -5,13 +5,13 @@
 
         <form action="{{ route('notes.search') }}" method="GET" class="form-inline" style="flex: 1; display: flex; justify-content: center; align-items: center;">
             <div class="form-group;" style="width: 80%;">
-                  <input type="text" name="search" class="form-control" placeholder=" 🔎 Buscar..." style="width: 100%;">
+                  <input type="text" name="search" class="form-control" placeholder=" 🔎 Buscar..." style="background-color:#f2f2f2; width: 100%;">
             </div>
         </form>
 
         <form action="{{ route('notes.search-date') }}" method="GET" class="form-inline" style="flex: 1; display: flex; justify-content: center; align-items: center;">
             <div class="form-group" style="display:flex; width: 80%;">
-                <input type="date" name="search" class="form-control" placeholder="Buscar por fecha" style="width: 100%;">
+                <input type="date" name="search" class="form-control" placeholder="Buscar por fecha" style="background-color:#f2f2f2; width: 100%;">
                 <button type="submit" style="color:white; background-color:black; border-color:black; display: none;" class="btn btn-primary ml-2">Search</button>
             </div>
         </form>
@@ -40,7 +40,7 @@
                 <div class="col-sm-3 d-flex">
                     <a href="{{ route('notes.show', $note->id) }}" style="text-decoration: none; width: 100%; color:black;">
                         <div class="card w-100" style="height: 370px;">
-                            <div class="card-body" style="margin-top:-2rem; height:330px; border-radius:6px; background-color:#e9e7e2; flex; flex-direction: column; justify-content: space-between;">
+                            <div class="card-body" style="margin-top:-2rem; height:330px; border-radius:6px; background-color:#f2f2f2; flex; flex-direction: column; justify-content: space-between;">
                                 <strong>
                                     <span style="font-size:20px; padding-left:1rem; color:black;">{{ $note->header }}</span>
                                 </strong>
@@ -63,7 +63,7 @@
                                             <form method="POST" action="{{ route('notes.destroy', $note->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="submit" style= "border: none; background-color:#e9e7e2;">
+                                                <button class="submit" style= "border: none; background:none;">
                                                     <i class="fi fi-ss-trash"></i>
                                                 </button>
                                             </form>
@@ -71,12 +71,12 @@
                                             <form method="GET" action="{{ route('notes.edit', $note->id) }}">
                                                 @csrf
                                                 @method('GET')
-                                                <button class="submit" style= "border: none; background-color:#e9e7e2;">
+                                                <button class="submit" style= "border: none; background:none;">
                                                     <i class="fi fi-sr-pencil"></i>
                                                 </button>
                                             </form>
 
-                                            <button class="pin-btn" data-id="{{ $note->id }}" style= "border: none; background-color:#e9e7e2;">
+                                            <button class="pin-btn" data-id="{{ $note->id }}" style= "border: none; background:none;">
                                                 @if ($note->pinned)
                                                     <i class="fi fi-sr-thumbtack"></i>
                                                         @else

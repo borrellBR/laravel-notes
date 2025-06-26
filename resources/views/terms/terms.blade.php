@@ -1,8 +1,10 @@
 @include ('layouts.terms-header')
 
 <br><br>
+<a style="color:rgb(0, 0, 0); margin-top:-4rem;background-color:rgb(255, 255, 255); flex: 1; display: flex; justify-content: center; align-items: center;" href="{{ route('login') }}">Volver al Login</a>
 
-<p style="white-space: pre-line; text-align: center; margin-left:10rem; margin-right:10rem">
+<h3 style= "margin-left:4rem; "> Terminos y condiciones:</h3>
+<p style="white-space: pre-line; text-align: center; margin-left:4rem; margin-right:4rem">
 
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere sem massa, maximus scelerisque risus imperdiet in. Cras in nulla hendrerit, sodales mi et, euismod turpis. Integer sodales dolor odio, in lacinia elit ultrices quis. Donec porttitor lacinia enim, eu tempus dolor ultrices at. Suspendisse et magna accumsan, vulputate sapien nec, iaculis ligula. In elementum commodo enim non tempor. Suspendisse elit elit, facilisis at elit eget, bibendum aliquet ipsum. Praesent tincidunt, elit vel posuere sagittis, neque velit varius leo, nec pharetra sapien mauris sit amet ante. Curabitur orci magna, pellentesque eu sapien nec, pretium finibus turpis. Duis dui tortor, dapibus sit amet justo et, tempor feugiat massa. Quisque dolor felis, pellentesque nec porta in, sollicitudin ut tellus.
 

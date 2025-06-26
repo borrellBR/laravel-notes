@@ -79,10 +79,10 @@
 
         <div class="image-card">
             @foreach ($note->images as $image)
-                <div style="position:relative; display:inline-block; margin:0 0 4rem 4rem;">
+                <div style="position:relative; display:inline-block; margin:-4rem 0 0rem 4rem;">
                     <img src="{{ asset('storage/' . $image->image_url) }}"
                          alt="Imagen de la nota"
-                         style="border-radius:4rem; max-width:300px; min-height:275px;">
+                         style="border-radius:4rem; width:100%; width:300px; height:300px;">
 
                     <form id="delete{{ $image->id }}" method="POST" action="{{ route('image.destroy', $image) }}">
                         @csrf
