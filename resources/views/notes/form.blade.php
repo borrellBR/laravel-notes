@@ -1,37 +1,7 @@
 @include ('layouts.show_note-header')
 
-    @if($mode === 'show')
-        <div style="display:flex; align-items:center;"class="titulo">
-            <strong style="font-size:2.8rem; margin-left: 4rem;">{{ $note->header }}</h1></strong>
 
-            <form style="margin-left: 120rem;" method="GET" action="{{ route('notes.edit', $note->id) }}">
-                @csrf
-                @method('GET')
-                <button style=""class="submit" style= "border: none; background-color:#e9e7e2;">
-                    <i class="fi fi-sr-pencil"></i>Editar Nota
-                </button>
-            </form>
-
-
-        </div>
-        {{-- <hr style="border: 1px solid #cbc9c9; margin: 20px 0;"> --}}
-
-
-        <p style="outline:none; border:none; padding-top:2rem; padding-right:4rem; padding-left:4rem; padding-bottom:45rem; background:transparent; font-weight:bold; resize:none; font-size:1.2rem; width:100%">
-            {{ $note->text }}</p>
-            @if ($note->reminder)
-                <p>
-                    <strong>Reminder:</strong> {{ $note->reminder ?? '' }}
-                </p>
-            @endif
-
-        <div style="margin-bottom: 3rem">
-            @foreach ($note->images as $image)
-                <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota" style="border-radius:4rem; margin-left:10rem; margin-top:4rem; max-width: 300px; min-height: 275px;">
-            @endforeach
-        </div>
-
-    @elseif ($mode === 'create')
+    @if ($mode === 'create')
     <nav style="margin-top:2rem; border-radius:8px; display: flex; justify-content: space-between; align-items: center;">
 
         <div style="flex: 1; display: flex; justify-content: center; align-items: center; margin-left:">
@@ -80,8 +50,6 @@
 
                 </div>
 
-
-
         <form method="POST" action="{{ route('notes.update', $note->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -107,10 +75,27 @@
             </div>
 
 
-            @foreach ($note->images as $image)
-                <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota" style=" margin-bottom:4rem; border-radius:4rem; margin-right:0rem; margin-left:4rem; max-width: 300px; min-height: 275px;">
-            @endforeach
-
         </form>
+
+        <div class="image-card">
+            @foreach ($note->images as $image)
+                <div style="position:relative; display:inline-block; margin:0 0 4rem 4rem;">
+                    <img src="{{ asset('storage/' . $image->image_url) }}"
+                         alt="Imagen de la nota"
+                         style="border-radius:4rem; max-width:300px; min-height:275px;">
+
+                    <form id="delete{{ $image->id }}" method="POST" action="{{ route('image.destroy', $image) }}">
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit" style=" color:white; position:absolute; top:8px; right:8px; border:none; background:none; cursor:pointer;">
+                            <i class="fi fi-ss-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
+
     @endif
+
 

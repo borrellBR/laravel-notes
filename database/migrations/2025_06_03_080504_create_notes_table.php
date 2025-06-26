@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('reminder')->nullable();
             $table->timestamps();
 
-            $table -> foreignId('user_id') -> constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table -> foreignId('user_id') -> constrained()->onDelete('cascade');
 
         });
     }

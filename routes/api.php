@@ -27,6 +27,9 @@ Route::middleware('auth:api')->group(function () {
 
     });
 
+    Route::delete('images/{image}', [ImageController::class,'destroy']);
+
+
     Route::prefix('notes/{note}/images')->group(function () {
         Route::post('/', [ImageController::class, 'store']);
         Route::get('/', [ImageController::class, 'index']);

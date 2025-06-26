@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
 
     });
 
+        Route::delete('images/{image}', [ImageController::class,'destroy'])->name('image.destroy');
 
     Route::prefix('edit-profile')->group(function () {
         Route::put("/", [UserController::class, 'updateProfile']) ->name('edit-profile.put');

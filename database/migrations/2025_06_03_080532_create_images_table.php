@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image_url');
             $table->timestamps();
 
-            $table -> foreignId('note_id') -> constrained() -> onUpdate('cascade') -> onDelete('cascade');
+            $table -> foreignId('note_id') -> constrained() -> onDelete('cascade');
 
         });
     }

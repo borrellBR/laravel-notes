@@ -72,4 +72,5 @@ class NoteController extends Controller
 
         return response()->json(['pinned' => $note -> pinned]);
   }
+
 }

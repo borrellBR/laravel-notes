@@ -36,8 +36,11 @@ class ImageController extends Controller
             ->with('image', $savedImage);
     }
 
-    public function destroy(Image $image)
-    {
-        // porsiacaso
+        public function destroy(Image $image)
+        {
+            $this->imageService->destroy($image);
+            return redirect()
+            ->route('notes.edit', $image->note_id)
+            ->with('message', 'Imagen eliminada correctamente');
     }
 }

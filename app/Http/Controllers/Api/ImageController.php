@@ -36,6 +36,7 @@ class ImageController extends Controller
 
     public function destroy(Image $image)
     {
-        //PORSIACASO
+      $this->imageService->destroy($image);
+      return response()->json(['message' => 'Image deleted successfully']);
     }
 }
