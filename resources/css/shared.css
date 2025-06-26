@@ -8,4 +8,19 @@ body {
 
 .card-body:hover {
     transform: scale(1.05);
+    text-decoration: none !important;
+}
+
+.note-link,
+.note-link:hover,
+.note-link:focus,
+.note-link:active,
+.note-link .note-title,
+.note-link:hover .note-title,
+.note-link .btn-icon,
+.note-link:hover .btn-icon,
+.note-link .btn-icon i,
+.note-link:hover .btn-icon i {
+    color: #000 !important;          /* mantiene el negro */
+    text-decoration: none !important;/* quita la línea */
 }
