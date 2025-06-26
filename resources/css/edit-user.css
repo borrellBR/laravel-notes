@@ -1,0 +1,44 @@
+.title-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -2rem;
+    padding-bottom: -4rem;
+    margin-left:1.5rem;
+}
+
+.hr-gray {
+    border: 1px solid #cbc9c9;
+    margin: 20px 0;
+}
+
+.profile-form {
+    text-align: left;
+    margin: 5rem 60rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: .5rem;
+}
+
+.profile-input {
+    padding: 2rem;
+}
+
+.submit-container {
+    text-align: center;
+}
+
+.submit-btn {
+    margin-top: 30rem;
+    color: #fff;
+    background: #000;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-btn i {
+    margin-right: .5rem;
+    color: #fff;
+}

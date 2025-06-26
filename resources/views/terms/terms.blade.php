@@ -1,8 +1,25 @@
 @include ('layouts.terms-header')
+<style>
+.login-btn {
+    color: rgb(0, 0, 0);
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: rgb(227, 226, 226);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
-<br><br>
-<a style="color:rgb(0, 0, 0); margin-top:-4rem;background-color:rgb(255, 255, 255); flex: 1; display: flex; justify-content: center; align-items: center;" href="{{ route('login') }}">Volver al Login</a>
+.login-btn:hover{
+    background-color: rgb(204, 204, 204);
+    transition:0.5s
+}
+</style>
 
+<button class="login-btn" onclick="window.location.href='{{ route('login') }}'">Volver al Login</button>
 <h3 style= "margin-left:4rem; "> Terminos y condiciones:</h3>
 <p style="white-space: pre-line; text-align: center; margin-left:4rem; margin-right:4rem">
 
