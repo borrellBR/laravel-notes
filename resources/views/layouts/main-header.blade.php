@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" rel="stylesheet">
     @vite('resources/js/app.js')
-    @vite('resources/css/app.css')
+    @vite('resources/css/index.css')
+    @vite('resources/css/shared.css')
+
 
     <title>Document</title>
 </head>

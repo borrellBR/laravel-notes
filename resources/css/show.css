@@ -1,0 +1,114 @@
+.note-nav   {
+    margin-top:2rem;
+    border-radius:8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo-wrap  {
+    flex:1;
+    display:flex;
+    align-items:center;
+}
+
+.logo-center{
+    justify-content:center;
+}
+
+.logo-end
+{justify-content:flex-end;
+    margin-right:20rem;
+}
+
+.logo-img   {
+    max-width:20rem;
+}
+
+.note-header-create{
+    outline:none;
+    margin-top:4rem;
+    padding:4rem;
+    border:none;
+    background:transparent;
+    font-weight:bold;
+    font-size:2rem;
+    width:100%;
+}
+
+.note-header-edit  {
+    outline:none;
+    margin-left:4rem;
+    border:none;
+    background:transparent
+    ;font-weight:bold;
+    font-size:2.8rem;
+    width:100%;
+}
+
+
+.note-textarea{
+    outline:none;
+    border:none;
+    padding:2rem 4rem 45rem 4rem;
+    background:transparent;
+    font-weight:bold;
+    resize:none;
+    font-size:1.2rem;
+    width:100%;
+}
+
+
+
+.form-tools-create{
+    margin-left:135rem;
+    margin-top:-69rem;
+    display:flex;
+    gap:.5rem;
+}
+
+.form-tools-edit  {
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    margin-right:2rem;
+}
+
+button            {
+    cursor:pointer;
+    border:none;
+}
+
+
+
+.image-card   {
+    margin-top:1rem;
+}
+
+.image-wrapper{
+    position:relative;
+    display:inline-block;
+    margin:-4rem 0 0 4rem;
+}
+
+.note-image   {
+    border-radius:4rem;
+    width:300px;
+    height:300px;
+    object-fit:cover;
+}
+
+
+.img-delete-btn{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:none;
+    color:white;
+    cursor:pointer;
+}
+
+
+.top-right{
+    display:flex;
+}
