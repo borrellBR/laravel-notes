@@ -11,11 +11,9 @@
     <form method="POST" action="{{ route('notes.store') }}" enctype="multipart/form-data">
         @csrf
 
-        <input type="text" name="header" id="header" placeholder="Encabezado"
-               class="note-header-create" required>
+        <input type="text" name="header" id="header" placeholder="Encabezado" class="note-header-create" required>
 
-        <textarea name="text" id="text" placeholder="Texto"
-                  class="note-textarea" required></textarea>
+        <textarea name="text" id="text" placeholder="Texto" class="note-textarea" required></textarea>
 
         <div class="form-tools-create top-right">
             <label for="reminder">Recordatorio</label>
@@ -66,16 +64,15 @@
  </form>
 
 
-    {{-- Galería de imágenes --}}
     <div class="image-card">
     @foreach ($note->images as $image)
         <div class="image-wrapper">
-            <img src="{{ asset('storage/' . $image->image_url) }}"
-                 alt="Imagen de la nota" class="note-image">
+            <img src="{{ asset('storage/' . $image->image_url) }}" alt="Imagen de la nota" class="note-image">
 
             <form id="delete{{ $image->id }}" method="POST" action="{{ route('image.destroy', $image) }}">
                 @csrf
                 @method('DELETE')
+
                 <button type="submit" class="img-delete-btn">
                     <i class="fi fi-ss-trash"></i>
                 </button>

@@ -1,0 +1,17 @@
+.login-btn {
+    color: rgb(0, 0, 0);
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: rgb(227, 226, 226);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-btn:hover{
+    background-color: rgb(204, 204, 204);
+    transition:0.5s
+}

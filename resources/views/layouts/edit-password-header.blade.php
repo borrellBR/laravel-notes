@@ -7,7 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     @vite('resources/css/edit-password.css')
+    @vite('resources/css/edit-user.css')
 
+    @vite('resources/css/app.css')
 
     <title>Document</title>
 </head>
@@ -28,11 +30,11 @@
         </div>
 
         @if(Request::is('edit-password'))
-                    <div class="top-right" style= "border-radius:8px; margin-left:2rem; align-items:center; display:flex; background-color:rgb(234, 234, 234)">
+                    <div class="top-right" style= "border-radius:8px; margin-right:3rem;align-items:center; display:flex; background-color:rgb(234, 234, 234)">
                         <a href="{{ route('edit-profile.get') }}" class="btn btn-dark fw-bold" style="border-radius:8px; color:grey; text-decoration:none;display: flex; align-items: center; justify-content: center; height: 3rem;">
                             <i class="fi fi-sr-pencil" style="margin-right: 0.5rem;"></i> Editar Perfil
                         </a>
-                <a href="{{ route('edit-password.get') }}" class="btn btn-dark fw-bold" style=" text-decoration:none; background-color:black; color:white;  display: flex; align-items: center; justify-content: center; height: 3rem;">
+                <a href="{{ route('edit-password.get') }}" class="btn btn-dark fw-bold" style="  text-decoration:none; background-color:black; color:white;  display: flex; align-items: center; justify-content: center; height: 3rem;">
                     <i class="fi fi-sr-pencil" style="margin-right: 0.5rem;"></i> Cambiar contraseña
                  </a>
             </div>

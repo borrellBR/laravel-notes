@@ -1,6 +1,6 @@
 
 
-    @include('layouts.edit-user-header')
+    @include('layouts.edit-password-header')
 
     <div class="title-bar">
         <h3>Editar Perfil</h3>
@@ -14,24 +14,17 @@
 
         <div class="form-group">
             <label for="email">Email*</label>
-            <input type="email" id="email" name="email"
-                   class="form-control profile-input"
-                   placeholder="Enter email"
-                   value="{{ auth()->user()->email }}" required>
+            <input type="email" id="email" name="email" class="form-control profile-input" placeholder="Enter email" value="{{ auth()->user()->email }}" required>
         </div>
 
         <div class="form-group">
             <label for="name">Nombre*</label>
-            <input type="text" id="name" name="name"
-                   class="form-control profile-input"
-                   value="{{ auth()->user()->name }}" required>
+            <input type="text" id="name" name="name" class="form-control profile-input" value="{{ auth()->user()->name }}" required>
         </div>
 
         <div class="form-group">
             <label for="lastname">Apellidos*</label>
-            <input type="text" id="lastname" name="lastname"
-                   class="form-control profile-input"
-                   value="{{ auth()->user()->lastname }}" required>
+            <input type="text" id="lastname" name="lastname" class="form-control profile-input" value="{{ auth()->user()->lastname }}" required>
         </div>
 
         <div class="submit-container">

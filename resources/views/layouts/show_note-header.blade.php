@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" rel="stylesheet">
     @vite('resources/js/app.js')
     @vite('resources/css/show.css')
+    @vite('resources/css/app.css')
 
     <title>Document</title>
     <style>

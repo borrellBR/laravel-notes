@@ -21,6 +21,6 @@ body {
 .note-link:hover .btn-icon,
 .note-link .btn-icon i,
 .note-link:hover .btn-icon i {
-    color: #000 !important;          /* mantiene el negro */
-    text-decoration: none !important;/* quita la línea */
+    color: #000 !important;
+    text-decoration: none !important;
 }

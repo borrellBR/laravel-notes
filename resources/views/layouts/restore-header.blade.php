@@ -8,15 +8,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     @vite('resources/css/app.css')
+    @vite('resources/css/mail-password.css')
+
 
     <title>Document</title>
 </head>
 <body>
-    <nav style="display: flex; justify-content: space-between; align-items: center;">
-
-        <div style="width:25rem;flex: 1; display: flex; justify-content: center; align-items: center;">
-                <img src="Scribl.png" alt="Scribl Logo">
-        </div>
+    <nav class="navbar">
+            <img class="logo" src="Scribl.png" alt="Scribl Logo">
     </nav>
 </body>
 </html>
