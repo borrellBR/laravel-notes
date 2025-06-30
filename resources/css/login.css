@@ -64,22 +64,57 @@
 
 
 
-@media (min-width: 900px) and (max-width: 1500px) {
+
+
+@media (min-width: 800px) and (max-width: 1500px) {
     .form-group {
         margin-left: 2rem;
         margin-right: 2rem;
     }
 
     .img{
-        margin-top: -8rem;
+        margin-top: -2rem;
     }
 
     .fields {
-        margin-top: -5rem;
+        margin-top: -3rem;
     }
 
     .submit-container-login {
         text-align: center;
         margin-top: 5rem
     }
+
+    .img{
+        width: 400px;
     }
+}
+
+@media (min-width: 678px) and (max-width: 800px) {
+    .form-group {
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
+
+    .img{
+        margin-top: -3rem;
+        font-size: 2vw;
+    }
+
+    .fields {
+        margin-top: -3rem;
+    }
+
+    .submit-container-login {
+        text-align: center;
+        margin-top: 1.5rem
+    }
+
+    .img{
+        width: 300px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 678px) {
+   /* aqui hare img arriba y form abajo */
+}
