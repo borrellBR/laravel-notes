@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     @vite('resources/css/shared.css')
-    @vite('resources/css/login-header.css')
-    @vite('resources/css/login.css')
+    @vite('resources/css/register.css')
 
 
 
